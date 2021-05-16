@@ -36,9 +36,9 @@ INSTALL_PREFIX = /usr/local/
 CREATE_DIR = /usr/local/share/
 DESKTOP_DIR = /usr/share/applications
 
-FILE1 = pmu.xml
+FILE1 = pmu.glade
 FILE2 = PmuLogo.png
-FILE3 = PSLab.PNG
+FILE3 = pmu_background_img.png
 FILE4 = PmuLogo1.png
 FILE5 = logo.png
 FILE6 = PMU.desktop
@@ -46,8 +46,8 @@ FILE6 = PMU.desktop
 
 CC = gcc
 LIBS = -lpthread -lm -lrt
-LDLIBS=`pkg-config --cflags --libs gtk+-2.0`
-CFLAGS=`pkg-config --cflags --cflags gtk+-2.0`
+LDLIBS=`pkg-config --cflags --libs gtk+-3.0`
+CFLAGS=`pkg-config --cflags --cflags gtk+-3.0`
 
 SOURCES = \
 	pmu.c \
@@ -58,7 +58,7 @@ SOURCES = \
 	CfgGuiFunctions.c CfgGuiFunctions.h \
 
 OBJECTS =  pmu.c PmuGui.o function.o ServerFunction.o CfgFunction.o CfgGuiFunctions.o 
-CLEAN_OBJECTS = PmuGui.o function.o ServerFunction.o CfgFunction.o CfgGuiFunctions.o pmu.xml
+CLEAN_OBJECTS = PmuGui.o function.o ServerFunction.o CfgFunction.o CfgGuiFunctions.o
 
 PROGRAM = PMU
 
@@ -71,13 +71,13 @@ $(PROGRAM): $(OBJECTS)
 	$(COMPILE) $(CFLAGS) -c $<
 
 install: $(PROGRAM)
-	gtk-builder-convert pmu.glade pmu.xml
-	mkdir -p $(CREATE_DIR)PMU/$
+	#gtk-builder-convert pmu.glade pmu.ui
+	mkdir -p $(CREATE_DIR)PMU/images
 	cp -f $(FILE1) $(CREATE_DIR)PMU/$(FILE1)
-	cp -f images/$(FILE2) $(CREATE_DIR)PMU/$(FILE2)
-	cp -f images/$(FILE3) $(CREATE_DIR)PMU/$(FILE3)
-	cp -f images/$(FILE4) $(CREATE_DIR)PMU/$(FILE4)
-	cp -f images/$(FILE5) $(CREATE_DIR)PMU/$(FILE5)
+	cp -f images/$(FILE2) $(CREATE_DIR)PMU/images/$(FILE2)
+	cp -f images/$(FILE3) $(CREATE_DIR)PMU/images/$(FILE3)
+	cp -f images/$(FILE4) $(CREATE_DIR)PMU/images/$(FILE4)
+	cp -f images/$(FILE5) $(CREATE_DIR)PMU/images/$(FILE5)
 	cp -f images/$(FILE6) $(DESKTOP_DIR)/$(FILE6)
 	cp $(PROGRAM) $(INSTALL_PREFIX)bin/$(PROGRAM)
 	mkdir -p $(HOME)/iPDC/DataDir
@@ -90,7 +90,7 @@ install: $(PROGRAM)
 
 uninstall:
 	rm -f $(INSTALL_PREFIX)bin/$(PROGRAM)
-	rm -rf $(CREATE_DIR)PMU$
+	rm -rf $(CREATE_DIR)PMU/
 	rm -rf $(DESKTOP_DIR)/$(FILE6)
 	rm -f $(CLEAN_OBJECTS) $(PROGRAM)
 

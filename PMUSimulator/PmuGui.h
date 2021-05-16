@@ -135,11 +135,11 @@ void manage_data_sources();
 
 void Set_data_source(GtkRadioButton *radiobutton, gpointer udata);
 
-void file_ok_sel(GtkWidget *w, GtkFileSelection *fs);
+void file_ok_sel(GtkWidget *w, GtkFileChooser *fs);
 
 void pmu_setup_file_selection(GtkWidget *widget, gpointer udata);
 
-void view_setup_file (GtkWidget *w, GtkFileSelection *fs);
+void view_setup_file (GtkWidget *w, GtkFileChooser *fs);
 
 void apply_pmu_setup (GtkWidget *w, gpointer udata);
 

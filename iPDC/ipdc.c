@@ -47,7 +47,7 @@
 #include "ipdcGui.h"
 
 /* Common fixed path for storage of few common files */
-#define UI_fILE "/usr/local/share/iPDC/iPDC.xml"
+#define UI_fILE "/usr/local/share/iPDC/iPDC.glade"
 
 
 /* ---------------------------------------------------------------- */
@@ -113,10 +113,10 @@ int main(int argc, char **argv)
 		GW(menu_conn_table);
 		GW(about_menuitem);
 		GW(exit_menuitem);
-		GW(text_view);
+		//GW(text_view);
 		GW(text_view1);
 		GW(rights_label);
-		GW(admin_label);
+		//GW(admin_label);
 		GW(time_lable);
 	#undef GW
 
@@ -125,9 +125,10 @@ int main(int argc, char **argv)
 	gtk_builder_connect_signals(builder, NULL);
 
      // Changes how a toplevel window deals with its size request and user resize attempts. 
-     gtk_window_set_policy (GTK_WINDOW (data->ipdc), FALSE, TRUE, TRUE);
+     gtk_window_set_default_size (GTK_WINDOW (data->ipdc),710, 590);
+     gtk_window_set_resizable(GTK_WINDOW (data->ipdc), TRUE);
      gtk_window_set_position(GTK_WINDOW(data->ipdc), GTK_WIN_POS_CENTER);
-     gtk_window_set_icon(GTK_WINDOW(data->ipdc), create_pixbuf("/usr/local/share/iPDC/logo.png"));
+     gtk_window_set_icon(GTK_WINDOW(data->ipdc), create_pixbuf("/usr/local/share/iPDC/images/logo.png"));
 
      /* Set the Title of Main Window */
 	gtk_window_set_title (GTK_WINDOW (data->ipdc), "iPDC");

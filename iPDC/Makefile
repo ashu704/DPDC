@@ -36,17 +36,17 @@ INSTALL_PREFIX = /usr/local/
 CREATE_DIR = /usr/local/share/
 DESKTOP_DIR = /usr/share/applications
 
-FILE1 = iPDC.xml
+FILE1 = iPDC.glade
 FILE2 = ipdcLogo.png
-FILE3 = PSLab.PNG
+FILE3 = background_img.png
 FILE4 = ipdcLogo1.png
 FILE5 = logo.png
 FILE6 = iPDC.desktop
 
 CC = gcc
 LIBS = -lpthread
-LDLIBS=`pkg-config --cflags --libs gtk+-2.0`
-CFLAGS=-g `pkg-config --cflags --cflags gtk+-2.0`
+LDLIBS=`pkg-config --cflags --libs gtk+-3.0`
+CFLAGS=-g `pkg-config --cflags --cflags gtk+-3.0`
 
 SOURCES = \
 	ipdc.c \
@@ -60,7 +60,7 @@ SOURCES = \
 
 OBJECTS =  ipdc.c recreate.o connections.o new_pmu_or_pdc.o parser.o dallocate.o align_sort.o ipdcGui.o 
 
-CLEAN_OBJECTS =  recreate.o connections.o new_pmu_or_pdc.o parser.o dallocate.o align_sort.o ipdcGui.o iPDC.xml
+CLEAN_OBJECTS =  recreate.o connections.o new_pmu_or_pdc.o parser.o dallocate.o align_sort.o ipdcGui.o
 
 PROGRAM = iPDC
 
@@ -73,20 +73,21 @@ $(PROGRAM): $(OBJECTS)
 	$(COMPILE) $(CFLAGS) -c $<
 
 install: $(PROGRAM)
-	gtk-builder-convert iPDC.glade iPDC.xml
-	mkdir -p $(CREATE_DIR)iPDC/$
+	#gtk-builder-convert iPDC.glade iPDC.xml
+	#gtk-builder-convert iPDC.glade iPDC.ui
+	mkdir -p $(CREATE_DIR)iPDC/images
 	cp -f $(FILE1) $(CREATE_DIR)iPDC/$(FILE1)
-	cp -f images/$(FILE2) $(CREATE_DIR)iPDC/$(FILE2)
-	cp -f images/$(FILE3) $(CREATE_DIR)iPDC/$(FILE3)
-	cp -f images/$(FILE4) $(CREATE_DIR)iPDC/$(FILE4)
-	cp -f images/$(FILE5) $(CREATE_DIR)iPDC/$(FILE5)
+	cp -f images/$(FILE2) $(CREATE_DIR)iPDC/images/$(FILE2)
+	cp -f images/$(FILE3) $(CREATE_DIR)iPDC/images/$(FILE3)
+	cp -f images/$(FILE4) $(CREATE_DIR)iPDC/images/$(FILE4)
+	cp -f images/$(FILE5) $(CREATE_DIR)iPDC/images/$(FILE5)
 	cp -f images/$(FILE6) $(DESKTOP_DIR)/$(FILE6)
 	cp $(PROGRAM) $(INSTALL_PREFIX)bin/$(PROGRAM)
 #	rm -f $(CLEAN_OBJECTS) $(PROGRAM)
 
 uninstall:
 	rm -f $(INSTALL_PREFIX)bin/$(PROGRAM)
-	rm -rf $(CREATE_DIR)iPDC$
+	rm -rf $(CREATE_DIR)iPDC/
 	rm -rf $(DESKTOP_DIR)/$(FILE6)
 	rm -f $(CLEAN_OBJECTS) $(PROGRAM)
 

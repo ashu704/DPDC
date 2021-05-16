@@ -180,57 +180,68 @@ void display_pdc_detail (GtkButton *widget, gpointer udata)
 		gtk_window_set_resizable ( GTK_WINDOW (new_window), FALSE);
 
 		/* create a table of 8 by 2 squares. */
+		
 		rows = 7;
-		table = gtk_table_new (rows, 2, FALSE);
+		table = gtk_grid_new (); // table = gtk_table_new (rows, 2, FALSE);
+		
 
 		/* set the spacing to 10 on x and 10 on y */
-		gtk_table_set_row_spacings (GTK_TABLE (table), 16);
-		gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 16); // gtk_table_set_row_spacings (GTK_TABLE (table), 16);
+		gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+
 
 		/* pack the table into the window */
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), table, TRUE, TRUE, 0);
+		gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), table, TRUE, TRUE, 0);
 		gtk_widget_show (table);
 
 		/* Add a "close" button to the bottom of the dialog */
-		ok_button = gtk_button_new_from_stock (GTK_STOCK_OK);// or GTK_STOCK_APPLY);
+		ok_button = gtk_dialog_add_button((GtkDialog *)new_window, "OK", GTK_RESPONSE_OK); // gtk_button_new_from_stock (GTK_STOCK_OK);
 
 		/* This simply creates a grid of labels on the table to demonstrate the window. 
 		   g_markup_printf_escaped (): function to display diffrent color and font of text on label */
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='12'><b>iPDC Details</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+
+		gtk_grid_attach (GTK_GRID(table), label, 0, 0, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+		
 		gtk_widget_show (label);
 		g_free (markup);
 
 		label = gtk_label_new ("iPDC ID Code");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("iPDC UDP Port");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("iPDC TCP Port");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server IP");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server Port");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Wait Time (μs)");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 6, 7);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 6, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 6, 7);
 		gtk_widget_show (label);
 
 		/* This simply read from file and print on label in the table. */
@@ -241,46 +252,52 @@ void display_pdc_detail (GtkButton *widget, gpointer udata)
 		fgets(line,20,file_1);
 
 		label = gtk_label_new (line);
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
 		gtk_widget_show (label);
 
 		memset(line,'\0',sizeof(line));
 		fgets(line,20,file_1);
 
 		label = gtk_label_new (line);
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
 		gtk_widget_show (label);
 
 		memset(line,'\0',sizeof(line));
 		fgets (line, 20, file_1);
 
 		label = gtk_label_new (line);
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 3, 4);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 3, 4);
 		gtk_widget_show (label);
 
 		memset(line,'\0',sizeof(line));
 		fgets (line, 20, file_1);
 
 		label = gtk_label_new (line);
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 4, 5);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 4, 5);
 		gtk_widget_show (label);
 
 		/* This is print static text (9000) on label in the table. */
 		label = gtk_label_new ("9000");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
 		gtk_widget_show (label);
 
 		memset(line,'\0',sizeof(line));
 		fgets (line, 20, file_1);
 
 		label = gtk_label_new (line);
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 6, 7);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 6, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 6, 7);
 		gtk_widget_show (label);
 		fclose (file_1);
 
@@ -289,7 +306,7 @@ void display_pdc_detail (GtkButton *widget, gpointer udata)
 
 		/* This makes it so the ok_button is the default. */
 		gtk_widget_set_can_default (ok_button, TRUE);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), ok_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), ok_button, TRUE, TRUE, 0);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (ok_button);
@@ -318,11 +335,11 @@ void about_ipdc (GtkButton *widget, gpointer udata)
 
 	/* Define the diffrent properties of about_dialog. */
 	gtk_about_dialog_set_program_name ((GtkAboutDialog *)about_dialog, " ");
-	gtk_about_dialog_set_comments ((GtkAboutDialog *)about_dialog, "Authors :\nNitesh Pandit\nKedar Khandeparkar");//nWide Aera Measurement System\nDepartment of Electrical Engineering\nIndian Institute of Technology, Bombay\nMumbai, INDIA");
+	gtk_about_dialog_set_comments ((GtkAboutDialog *)about_dialog, "Authors :\nNitesh Pandit\nKedar Khandeparkar");// nWide Aera Measurement System\nDepartment of Electrical Engineering\nIndian Institute of Technology, Bombay\nMumbai, INDIA");
 
 	gtk_about_dialog_set_license ((GtkAboutDialog *)about_dialog, "iPDC - A Free Phasor Data Concentrator & PMU Simulator\n\nGeneral Public License (GPL)\n\nAuthors:\n\t\tNitesh Pandit <panditnitesh@gmail.com>\n\t\tKedar V. Khandeparkar <kedar.khandeparkar@gmail.com>\n\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n");
 
-    	gtk_about_dialog_set_logo ((GtkAboutDialog *)about_dialog, create_pixbuf("/usr/local/share/iPDC/ipdcLogo1.png"));
+    	gtk_about_dialog_set_logo ((GtkAboutDialog *)about_dialog, create_pixbuf("/usr/local/share/iPDC/images/ipdcLogo1.png"));
 	gtk_about_dialog_set_website ((GtkAboutDialog *)about_dialog, "\nhttp://ipdc.codeplex.com/\n");
 	gtk_about_dialog_set_copyright ((GtkAboutDialog *)about_dialog, "Copyright (C) 2011-2012 GPL3");
 	gtk_about_dialog_set_authors ((GtkAboutDialog *)about_dialog, auth);
@@ -395,32 +412,32 @@ void validation_result (char *msg)
 
 void ipdc_colors()
 {
-  	GtkTextBuffer *buffer, *buffer1;
+	GtkTextBuffer *buffer, *buffer1;
   	GtkTextMark *cursor, *cursor1;
   	GtkTextIter iter, iter1;
 	char *markup11;
 
-	markup11 = g_markup_printf_escaped ("<span foreground=\"#333333\" font='10'><b>Admin Operations</b></span>");
-	gtk_label_set_markup (GTK_LABEL (data->admin_label), markup11);
+	// markup11 = g_markup_printf_escaped ("<span foreground=\"#333333\" font='10'><b>Admin Operations</b></span>");
+	// gtk_label_set_markup (GTK_LABEL (data->admin_label), markup11);
 	g_free (markup11);
 
-	markup11 = g_markup_printf_escaped ("<span foreground=\"#330000\" font='8'>@All Rights Reserved</span>");
-	gtk_label_set_markup (GTK_LABEL (data->rights_label), markup11);
-	g_free (markup11);
+	// markup11 = g_markup_printf_escaped ("<span foreground=\"#330000\" font='8'>@All Rights Reserved</span>");
+	// gtk_label_set_markup (GTK_LABEL (data->rights_label), markup11);
+	// g_free (markup11);
 
 	/* Set the image (iPDC-logo) on a specific textview1 */
   	buffer1 = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->text_view1));
   	cursor1 = gtk_text_buffer_get_insert (buffer1);
   	gtk_text_buffer_get_iter_at_mark (buffer1, &iter1, cursor1);
-  	gtk_text_buffer_insert_pixbuf (buffer1, &iter1, create_pixbuf("/usr/local/share/iPDC/ipdcLogo.png"));
+  	gtk_text_buffer_insert_pixbuf (buffer1, &iter1, create_pixbuf("/usr/local/share/iPDC/images/ipdcLogo.png"));
      	gtk_widget_show (data->text_view1);
 
 	/* Set the general image on a textview */
-  	buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->text_view));
-  	cursor = gtk_text_buffer_get_insert (buffer);
-  	gtk_text_buffer_get_iter_at_mark (buffer, &iter, cursor);
-  	gtk_text_buffer_insert_pixbuf (buffer, &iter, create_pixbuf("/usr/local/share/iPDC/PSLab.PNG"));
-     	gtk_widget_show (data->text_view);
+  	// buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (data->text_view));
+  	// cursor = gtk_text_buffer_get_insert (buffer);
+  	// gtk_text_buffer_get_iter_at_mark (buffer, &iter, cursor);
+  	// gtk_text_buffer_insert_pixbuf (buffer, &iter, create_pixbuf("/usr/local/share/iPDC/PSLab.PNG"));
+   //   	gtk_widget_show (data->text_view);
 };
 
 
@@ -518,41 +535,41 @@ int validation_pdc_detail (GtkButton *button, gpointer udata)
 			gtk_container_set_border_width (GTK_CONTAINER (new_window), 10);
 
 			/* Create a table of 4 by 2 squares. */
-			table = gtk_table_new (4, 3, FALSE);
+			table = gtk_grid_new (); // table = gtk_table_new (4, 3, FALSE);
 
 			/* Set the spacing to 50 on x and 5 on y */
-			gtk_table_set_row_spacings (GTK_TABLE (table), 15);
-			gtk_table_set_col_spacings (GTK_TABLE (table), 5);
+			gtk_grid_set_row_spacing (GTK_GRID(table), 15); // gtk_table_set_row_spacings (GTK_TABLE (table), 15);
+			gtk_grid_set_column_spacing (GTK_GRID(table), 5); // gtk_table_set_col_spacings (GTK_TABLE (table), 5);
 
 			/* Pack the table into the window */
-			gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), table, TRUE, TRUE, 0);
+			gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), table, TRUE, TRUE, 0);
 			gtk_widget_show (table);
 
 			/* Add few buttons to the bottom of the dialog */
-			yes = gtk_button_new_with_label ("YES");
-			no = gtk_button_new_with_label ("NO");
+			yes = gtk_dialog_add_button((GtkDialog *)new_window, "YES", GTK_RESPONSE_OK); // gtk_button_new_with_label ("YES");
+			no = gtk_dialog_add_button((GtkDialog *)new_window, "NO", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("NO");
 
 			/* This simply creates a grid of toggle buttons on the table */
 			label = gtk_label_new (" ");
 			markup = g_markup_printf_escaped ("<span foreground=\"#F13313\" font='12'><b>Warning!</b></span>");
 			gtk_label_set_markup (GTK_LABEL (label), markup);
-			gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 0, 1);
+			gtk_grid_attach (GTK_GRID(table), label, 1, 0, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 0, 1);
 			gtk_widget_show (label);
 			g_free (markup);
 
-			label = gtk_hseparator_new();
-			gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 1, 2);
+			label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+			gtk_grid_attach (GTK_GRID(table), label, 0, 1, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 1, 2);
 			gtk_widget_show (label);
 
 			label = gtk_label_new (" ");
 			markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='10'><b>iPDC Setup File with the given ID code is alredy present\nin the system. Do you want to overwrite it?</b></span>");
 			gtk_label_set_markup (GTK_LABEL (label), markup);
-			gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
+			gtk_grid_attach (GTK_GRID(table), label, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
 			gtk_widget_show (label);
 			g_free (markup);
 
-			label = gtk_hseparator_new();
-			gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 3, 4);
+			label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+			gtk_grid_attach (GTK_GRID(table), label, 0, 3, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 3, 4);
 			gtk_widget_show (label);
 
 			/* Signal handling for buttons on PMU Server Setup Window */
@@ -564,8 +581,8 @@ int validation_pdc_detail (GtkButton *button, gpointer udata)
 			/* This makes it so the button is the default. */
 			gtk_widget_set_can_default (yes, TRUE);
 			gtk_widget_set_can_default (no, TRUE);
-			gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), yes, TRUE, TRUE, 0);
-			gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), no, TRUE, TRUE, 0);
+			// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), yes, TRUE, TRUE, 0);
+			// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), no, TRUE, TRUE, 0);
 
 			/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 			gtk_widget_grab_default (yes);
@@ -647,7 +664,7 @@ void final_pdc_setup_call()
 
 	memset(buff, '\0', 50);
 	sprintf(buff, "%ld", TSBWAIT);  // Line 6 in file ipdc?.bin
-printf("buff = %s, & TSBWAIT = %ld.\n", buff, TSBWAIT);
+	printf("buff = %s, & TSBWAIT = %ld.\n", buff, TSBWAIT);
 	fputs(buff, fp_ptr);
 	fputc('\n',fp_ptr);	
 
@@ -710,7 +727,7 @@ int add_pmu_validation (GtkButton *but, gpointer udata)
 	text = gtk_entry_get_text(GTK_ENTRY(p_id));
 	text1 = gtk_entry_get_text(GTK_ENTRY(p_ip));
 	text2 = gtk_entry_get_text(GTK_ENTRY(p_port));
-	text3 = gtk_combo_box_get_active_text(GTK_COMBO_BOX(p_protocol));
+	text3 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(p_protocol));
 	memset(ip,'\0',20);
 	strcat(ip, text1);
 	strcpy (tmp, text3);
@@ -871,7 +888,7 @@ int cmd_or_remove_pmu_validation (GtkButton *but, gpointer udata)
 		const char *text, *text1;
 
 		text = gtk_entry_get_text(GTK_ENTRY(p_id));
-		text1 = gtk_combo_box_get_active_text(GTK_COMBO_BOX(p_protocol));
+		text1 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(p_protocol));
 		memset(tmp, '\0', 4);
 		strcpy (tmp, text1);
 	
@@ -991,7 +1008,7 @@ int new_pdc_validation (GtkButton *but, gpointer udata)
 
 	/* Get the text entries for PDC, filled by user */
 	text = gtk_entry_get_text(GTK_ENTRY(p_ip));
-	text1 = gtk_combo_box_get_active_text(GTK_COMBO_BOX(p_protocol));
+	text1 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(p_protocol));
 	memset(ip,'\0',20);
 	strcat(ip, text);
 	strcpy (tmp, text1);
@@ -1041,7 +1058,7 @@ int remove_pdc_validation (GtkButton *but, gpointer udata)
 	/* Get the text entries for remove source device by user */
 	text = gtk_entry_get_text(GTK_ENTRY(p_ip));
 	text1 = gtk_entry_get_text(GTK_ENTRY(p_port));
-	text2 = gtk_combo_box_get_active_text(GTK_COMBO_BOX(p_protocol));
+	text2 = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(p_protocol));
 	memset(ip,'\0',20);
 	strcat(ip, text);
 	strcpy (tmp, text2);
@@ -1167,97 +1184,105 @@ void fill_pdc_details (char *filePath)
 		gtk_container_set_border_width (GTK_CONTAINER (pdc_detail_window), 10);
 
 		/* Create a table of 6 by 2 squares. */
-		table = gtk_table_new (9, 2, FALSE);
+		table = gtk_grid_new (); // table = gtk_table_new (9, 2, FALSE);
 
 		/* Set the spacing to 15 on x and 25 on y */
-		gtk_table_set_row_spacings (GTK_TABLE (table), 10);
-		gtk_table_set_col_spacings (GTK_TABLE (table), 10);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 10); // gtk_table_set_row_spacings (GTK_TABLE (table), 10);
+		gtk_grid_set_column_spacing (GTK_GRID(table), 10); // gtk_table_set_col_spacings (GTK_TABLE (table), 10);
 
 		/* Pack the table into the window */
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(pdc_detail_window)->vbox), table, TRUE, TRUE, 0);
+		gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(pdc_detail_window))), table, TRUE, TRUE, 0);
 		gtk_widget_show (table);
 
 		/* Add few button to the bottom of the dialog */
-		valdbutton = gtk_button_new_with_label ("Add");
-		cancle_button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
-		help_button = gtk_button_new_from_stock (GTK_STOCK_HELP);// or GTK_STOCK_APPLY);
+		valdbutton = gtk_dialog_add_button((GtkDialog *)pdc_detail_window, "Add", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Add");
+		cancle_button = gtk_dialog_add_button((GtkDialog *)pdc_detail_window, "Cancel", GTK_RESPONSE_CLOSE); // gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+		help_button = gtk_dialog_add_button((GtkDialog *)pdc_detail_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_from_stock (GTK_STOCK_HELP);// or GTK_STOCK_APPLY);
 
 		/* This simply creates a grid of toggle buttons on the table */
 		label = gtk_label_new (" ");
 		markup15 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='12'><b>Fill iPDC Details</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup15);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 0, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
 		gtk_widget_show (label);
 		g_free (markup15);
 
 		label = gtk_label_new ("iPDC ID Code");
-          	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+          	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+			gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("iPDC UDP Port");
-          	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+          	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+			gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("iPDC TCP Port");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server IP ");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server Port");
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Wait Time (μs)"); // \xC2\xB5
-		gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 6, 7);
+		gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 6, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 6, 7);
 		gtk_widget_show (label);
 
 		/* Create text boxes for user to enter appropriate values */
 		p_id = gtk_entry_new();
 		gtk_entry_set_max_length ((GtkEntry *)p_id, 5);
-		gtk_table_attach_defaults (GTK_TABLE (table), p_id, 1, 2, 1, 2);
+		gtk_grid_attach (GTK_GRID(table), p_id, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_id, 1, 2, 1, 2);
 		gtk_widget_show (p_id);
 
 		p_udp = gtk_entry_new();
 		gtk_entry_set_max_length ((GtkEntry *)p_udp, 5);
-		gtk_table_attach_defaults (GTK_TABLE (table), p_udp, 1, 2, 2, 3);
+		gtk_grid_attach (GTK_GRID(table), p_udp, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_udp, 1, 2, 2, 3);
 		gtk_widget_show (p_udp);
 
 		p_tcp = gtk_entry_new();
 		gtk_entry_set_max_length ((GtkEntry *)p_tcp, 5);
-		gtk_table_attach_defaults (GTK_TABLE (table), p_tcp, 1, 2, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), p_tcp, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_tcp, 1, 2, 3, 4);
 		gtk_widget_show (p_tcp);
 
 		p_ip = gtk_entry_new();
 		gtk_entry_set_max_length ((GtkEntry *)p_ip, 15);
-		gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 4, 5);
+		gtk_grid_attach (GTK_GRID(table), p_ip, 1, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 4, 5);
 		gtk_widget_show (p_ip);
 
 		label = gtk_label_new (" ");
 		markup15 = g_markup_printf_escaped ("<span foreground=\"#111111\" font='12'><b>9000</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup15);
-         	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
+         	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+			gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
 		gtk_widget_show (label);
 
 		waitT = gtk_entry_new();
 		gtk_entry_set_max_length ((GtkEntry *)waitT, 15);
-		gtk_table_attach_defaults (GTK_TABLE (table), waitT, 1, 2, 6, 7);
+		gtk_grid_attach (GTK_GRID(table), waitT, 1, 6, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), waitT, 1, 2, 6, 7);
 		gtk_widget_show (waitT);
 
 		label = gtk_label_new (" ");
 		markup15 = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Wait Time: Maximum waiting time for Data Frames from \nSources. Should be within 50000μs to 1000000μs.</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup15);
-	     	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 8, 9);
+	     	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+			gtk_label_set_yalign (GTK_LABEL(label), 0);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 8, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 8, 9);
 		gtk_widget_show (label);
 		g_free (markup15);
 
@@ -1271,9 +1296,9 @@ void fill_pdc_details (char *filePath)
 		gtk_widget_set_can_default (valdbutton, TRUE);
 		gtk_widget_set_can_default (cancle_button, TRUE);
 		gtk_widget_set_can_default (help_button, TRUE);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), valdbutton, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), cancle_button, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), help_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), valdbutton, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), cancle_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pdc_detail_window)->action_area), help_button, TRUE, TRUE, 0);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (valdbutton);
@@ -1310,72 +1335,76 @@ void add_pmu (GtkButton *but, gpointer udata)
     	gtk_window_set_resizable ( GTK_WINDOW (add_pmu_window), FALSE);
 
 	/* Create a table of 5 by 2 squares. */
-	table = gtk_table_new (5, 2, FALSE);
+	table = gtk_grid_new (); // table = gtk_table_new (5, 2, FALSE);
 
 	/* Set the spacing to 20 on x and 30 on y */
-	gtk_table_set_row_spacings (GTK_TABLE (table), 16);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 16); // gtk_table_set_row_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE (table), 16);
 
 	/* Pack the table into the window */
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(add_pmu_window)->vbox), table, FALSE, FALSE, 0);
-	gtk_widget_show (table);
+	gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(add_pmu_window))), table, FALSE, FALSE, 0);
+	gtk_widget_show (table); 
 
 	/* Add few button to the bottom of the dialog */
-	close_button = gtk_button_new_with_label ("close");
-	valdbutton = gtk_button_new_with_label ("Add");
-	help_button = gtk_button_new_with_label ("Help");
+	close_button = gtk_dialog_add_button((GtkDialog *)add_pmu_window, "close", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("close");
+	valdbutton = gtk_dialog_add_button((GtkDialog *)add_pmu_window, "Add", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Add");
+	help_button = gtk_dialog_add_button((GtkDialog *)add_pmu_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Help");
 
 	/* This simply creates a grid of toggle buttons on the table */
 	label = gtk_label_new ("-");
 	markup1 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='12'><b>Enter Source Device Details</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup1);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 0, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
 	gtk_widget_show (label);
 	g_free (markup1);
 
 	label = gtk_label_new ("Source ID Code");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Source IP Address");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Source Port Number");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Protocol");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	p_id = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_id, 5);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_id, 1, 2, 1, 2);
+	gtk_grid_attach (GTK_GRID(table), p_id, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_id, 1, 2, 1, 2);
 	gtk_widget_show (p_id);
 
 	p_ip = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_ip, 15);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID(table), p_ip, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 2, 3);
 	gtk_widget_show (p_ip);
 
 	p_port = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_port, 5);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_port, 1, 2, 3, 4);
+	gtk_grid_attach (GTK_GRID(table), p_port, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_port, 1, 2, 3, 4);
 	gtk_widget_show (p_port);
 
 	/* Create combo boxe for user with some fixed values */
-	p_protocol = gtk_combo_box_new_text();
-	gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "UDP");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "TCP");
+	p_protocol = gtk_combo_box_text_new();
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "UDP");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "TCP");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_protocol), 0);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_protocol, 1, 2, 4, 5);
+	gtk_grid_attach (GTK_GRID(table), p_protocol, 1, 4, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_protocol, 1, 2, 4, 5);
 	gtk_widget_show (p_protocol);
 
 	/* Signal handling for buttons on Source Device Details Window */
@@ -1387,9 +1416,9 @@ void add_pmu (GtkButton *but, gpointer udata)
 	gtk_widget_set_can_default (close_button, TRUE);
 	gtk_widget_set_can_default (valdbutton, TRUE);
 	gtk_widget_set_can_default (help_button, TRUE);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), valdbutton, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), help_button, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), close_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), valdbutton, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), help_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (add_pmu_window)->action_area), close_button, TRUE, TRUE, 0);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (valdbutton);
@@ -1457,26 +1486,26 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	/* The dialog window is created with a vbox packed into it */								
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), scrolled_window, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), scrolled_window, FALSE, TRUE, 0);
 	gtk_widget_show (scrolled_window);
 
-    	hbox1 = gtk_hbox_new (FALSE, 16);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), hbox1, FALSE, TRUE, 0);
+    	hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 8); // gtk_hbox_new (FALSE, 16);
+	gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), hbox1, FALSE, TRUE, 0);
 	gtk_widget_show (hbox1);
 
-    	window2 = gtk_alignment_new (0,0,0,0);
+    	window2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);  // gtk_alignment_new (0,0,0,0);
 	gtk_box_pack_start (GTK_BOX (hbox1), window2, FALSE, TRUE, 0);
 	gtk_widget_show (window2);
 
 	/* create a table of 4 by 2 squares. */
-	table = gtk_table_new (20, 4, FALSE);
+	table = gtk_grid_new (); //table = gtk_table_new (20, 4, FALSE);
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_table_set_row_spacings (GTK_TABLE (table), 4);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 8);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 4); // gtk_table_set_row_spacings (GTK_TABLE (table), 4);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 8); // gtk_table_set_col_spacings (GTK_TABLE (table), 8);
 
 	/* Pack the table into the scrolled window */
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
 	gtk_widget_show (table);
 
 	/* Open the file 'ipdcINFO.bin' in read mode */
@@ -1489,7 +1518,7 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 		label = gtk_label_new (" ");
 		markup2 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No records were found.\n-------------------------------------------------------------------\n</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup2);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 4, 1, 2);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 1, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 4, 1, 2);
 		gtk_widget_show (label);
 		g_free(markup2);
 	} 
@@ -1500,21 +1529,21 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 
                 if(!strcmp(find_butn, "4"))
                 {
-                    valdbutton = gtk_button_new_with_label ("Send");
+                    valdbutton = gtk_dialog_add_button((GtkDialog *)new_window, "Send", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Send");
                 }
                 else if(!strcmp(find_butn, "1"))
                 {
-                    valdbutton = gtk_button_new_with_label ("Remove");	
+                    valdbutton = gtk_dialog_add_button((GtkDialog *)new_window, "Remove", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Remove");	
                 }
                 else if(!strcmp(find_butn, "2"))	/* if signal fired from send Transmission OFF request to Source device */
                 {
                     /* Add a "Send" button to the bottom of the dialog */
-                    valdbutton = gtk_button_new_with_label ("Send");
+                    valdbutton = gtk_dialog_add_button((GtkDialog *)new_window, "Send", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Send");
                 }
                 else if(!strcmp(find_butn, "3"))	/* if signal fired from send Transmission ON request to Source device */
                 {
                     /* Add a "Send" button to the bottom of the dialog */
-                    valdbutton = gtk_button_new_with_label ("Send");
+                    valdbutton = gtk_dialog_add_button((GtkDialog *)new_window, "Send", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Send");
                 }	
 
 		t = LLfirst;
@@ -1528,25 +1557,25 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 					memset(tmp_str,'\0',sizeof(tmp_str));
 					sprintf(tmp_str, "%d", t->pmuid);
                     			label = gtk_label_new (tmp_str);
-				    	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
-				    	gtk_widget_show (label);
+				    			gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+				    			gtk_widget_show (label);
 
 					memset(tmp_str,'\0',sizeof(tmp_str));
 					strcpy(tmp_str, t->ip);
                     			label = gtk_label_new (tmp_str);
-                    			gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+                    			gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
                     			gtk_widget_show (label);
 
 					memset(tmp_str,'\0',sizeof(tmp_str));
 					sprintf(tmp_str, "%d", t->port);
                     			label = gtk_label_new (tmp_str);
-                    			gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+                    			gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
                     			gtk_widget_show (label);
 					
 					memset(tmp_str,'\0',sizeof(tmp_str));
 					strncpy(tmp_str, t->protocol,3);
                     			label = gtk_label_new (tmp_str);
-                    			gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+                    			gtk_grid_attach (GTK_GRID(table), label, 3, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
                     			gtk_widget_show (label);
                     			i++;
 				}			
@@ -1559,24 +1588,32 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
                 label = gtk_label_new (" ");
                 markup2 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>Connections Detail</b></span>");
                 gtk_label_set_markup (GTK_LABEL (label), markup2);
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, 0, 1);
+                gtk_grid_attach (GTK_GRID(table), label, 0, 0, 4, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, 0, 1);
                 gtk_widget_show (label);
                 g_free(markup2);
 
                 label = gtk_label_new ("Source ID");
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+                gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+                gtk_grid_attach (GTK_GRID(table), label, 0, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
                 gtk_widget_show (label);
 
                 label = gtk_label_new ("IP");
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
+                gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+                gtk_grid_attach (GTK_GRID(table), label, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
                 gtk_widget_show (label);
 
                 label = gtk_label_new ("Port");
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 1, 2);
+                gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+                gtk_grid_attach (GTK_GRID(table), label, 2, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 1, 2);
                 gtk_widget_show (label);
 
                 label = gtk_label_new ("Protocol");
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 1, 2);
+                gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+                gtk_grid_attach (GTK_GRID(table), label, 3, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 1, 2);
                 gtk_widget_show (label);
             }
             else
@@ -1588,7 +1625,7 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
                     label = gtk_label_new (" ");
                     markup2 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No records were found.\n</b></span>");
                     gtk_label_set_markup (GTK_LABEL (label), markup2);
-                    gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
+                    gtk_grid_attach (GTK_GRID(table), label, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
                     gtk_widget_show (label);
                     g_free(markup2);
                 }
@@ -1598,7 +1635,7 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
                     label = gtk_label_new (" ");
                     markup2 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No records were found.\n</b></span>");
                     gtk_label_set_markup (GTK_LABEL (label), markup2);
-                    gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
+                    gtk_grid_attach (GTK_GRID(table), label, 1, 1, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 1, 2);
                     gtk_widget_show (label);
                     g_free(markup2);
                 }
@@ -1609,15 +1646,15 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
                 for (jj = i; jj < min_rows; jj++)
                 {
                 label = gtk_label_new (" ");
-                gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, jj, jj+1);
+                gtk_grid_attach (GTK_GRID(table), label, 1, jj, 4, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, jj, jj+1);
                 gtk_widget_show (label);
                 }
             }
 
 		/* Create combo boxe for user with some fixed values */
-		p_protocol = gtk_combo_box_new_text();
-		gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "UDP");
-		gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "TCP");
+		p_protocol = gtk_combo_box_text_new();
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "UDP");
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "TCP");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(p_protocol), 0);
 		gtk_box_pack_end (GTK_BOX (hbox1), p_protocol, FALSE, TRUE, 0);
 		gtk_widget_show (p_protocol);
@@ -1640,7 +1677,7 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 		gtk_widget_show (chkBtn);
 
 		/* Add a "Help" button to the bottom of the dialog */
-		help_button = gtk_button_new_with_label ("Help");
+		help_button = gtk_dialog_add_button((GtkDialog *)new_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Help");
 
 		/* Signal handling for buttons on Window */
 		g_signal_connect_swapped (valdbutton, "clicked", G_CALLBACK (cmd_or_remove_pmu_validation), valdbutton);
@@ -1650,8 +1687,8 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 		/* This makes it so the button is the default. */
 		gtk_widget_set_can_default (valdbutton, TRUE);
 		gtk_widget_set_can_default (help_button, TRUE);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (valdbutton);
@@ -1661,10 +1698,10 @@ void cmd_or_remove_pmu (GtkButton *but, gpointer udata)
 	}
 
 	/* Add a "Close" button to the bottom of the dialog */
-	close_button = gtk_button_new_with_label ("Close");
+	close_button = gtk_dialog_add_button((GtkDialog *)new_window, "Close", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("Close");
 	g_signal_connect_swapped (close_button, "clicked", G_CALLBACK (gtk_widget_destroy), new_window);
 	gtk_widget_set_can_default (close_button, TRUE);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
 	gtk_widget_grab_default (close_button);
 	gtk_widget_show (close_button);
 	on_flag = 0, off_flag = 0;
@@ -1717,51 +1754,53 @@ void add_new_pdc (GtkButton *but, gpointer udata)
     	gtk_window_set_resizable ( GTK_WINDOW (new_window), FALSE);
 
 	/* Create a table of 4 by 2 squares. */
-	table = gtk_table_new (4, 2, FALSE);
+	table = gtk_grid_new (); // table = gtk_table_new (4, 2, FALSE);
 
 	/* Set the spacing to 50 on x and 35 on y */
-	gtk_table_set_row_spacings (GTK_TABLE (table), 16);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 16); // gtk_table_set_row_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE (table), 16);
 
 	/* The dialog window is created with a vbox packed into it */								
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), table, FALSE, FALSE, 0);
+	gtk_box_pack_start ( GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), table, FALSE, FALSE, 0);
 	gtk_widget_show (table);
 
 	/* Add few buttons to the bottom of the dialog */
-	close_button = gtk_button_new_with_label ("close");
-	valdbutton = gtk_button_new_with_label ("Add");
-	help_button = gtk_button_new_with_label ("Help");
+	close_button = gtk_dialog_add_button((GtkDialog *)new_window, "Close", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("close");
+	valdbutton = gtk_dialog_add_button((GtkDialog *)new_window, "Add", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Add");
+	help_button = gtk_dialog_add_button((GtkDialog *)new_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Help");
 
 	/* this simply creates a grid of toggle buttons on the table to demonstrate the scrolled window. */
 	label = gtk_label_new (" ");
 	markup3 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>Enter Destination Device Details</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup3);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 0, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
 	gtk_widget_show (label);
 	g_free(markup3);
 
 	label = gtk_label_new ("Destination IP Address");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Protocol");
-    	gtk_misc_set_alignment (GTK_MISC(label),0,0);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+    	gtk_label_set_xalign (GTK_LABEL(label), 0); // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+		gtk_label_set_yalign (GTK_LABEL(label), 0);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	p_ip = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_ip, 15);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID(table), p_ip, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_ip, 1, 2, 2, 3);
 	gtk_widget_show (p_ip);
 
 	/* Create combo boxe for user with some fixed values */
-	p_protocol = gtk_combo_box_new_text();
-	gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "UDP");
-	gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "TCP");
+	p_protocol = gtk_combo_box_text_new();
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "UDP");
+	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "TCP");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_protocol), 0);
-	gtk_table_attach_defaults (GTK_TABLE (table), p_protocol, 1, 2, 3, 4);
+	gtk_grid_attach (GTK_GRID(table), p_protocol, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_protocol, 1, 2, 3, 4);
 	gtk_widget_show (p_protocol);
 
 	/* Signal handling for buttons on Destination Details Window */
@@ -1773,9 +1812,9 @@ void add_new_pdc (GtkButton *but, gpointer udata)
 	gtk_widget_set_can_default (close_button, TRUE);
 	gtk_widget_set_can_default (valdbutton, TRUE);
 	gtk_widget_set_can_default (help_button, TRUE);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (valdbutton);
@@ -1822,32 +1861,32 @@ void remove_pdc (GtkButton *but, gpointer udata)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	/* The dialog window is created with a vbox packed into it. */								
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), scrolled_window, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX(gtk_dialog_get_content_area(GTK_DIALOG(new_window))), scrolled_window, TRUE, TRUE, 0);
 	gtk_widget_show (scrolled_window);
 
-    	hbox1 = gtk_hbox_new (FALSE, 16);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), hbox1, FALSE, TRUE, 0);
+    	hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 16); // gtk_hbox_new (FALSE, 16);
+	gtk_box_pack_start ((GtkBox *) (GtkDialog *) (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), hbox1, FALSE, TRUE, 0);
 	gtk_widget_show (hbox1);
 
-    	window2 = gtk_alignment_new (0,0,0,0);
+    	window2 = window2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0); // gtk_alignment_new (0,0,0,0);
 	gtk_box_pack_start (GTK_BOX (hbox1), window2, FALSE, TRUE, 0);
 	gtk_widget_show (window2);
 
 	/* create a table of 6 by 2 squares. */
-	table = gtk_table_new (20, 3, FALSE);
+	table = gtk_grid_new (); // table = gtk_table_new (20, 3, FALSE);
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_table_set_row_spacings (GTK_TABLE (table), 8);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE (table), 8);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE (table), 16);
 
 	/* Pack the table into the scrolled window */
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
 	gtk_widget_show (table);
 
 	/* Add few buttons to the bottom of the dialog */
-	close_button = gtk_button_new_with_label ("close");
-	valdbutton   = gtk_button_new_with_label ("Remove");
-	help_button  = gtk_button_new_with_label ("Help");
+	close_button = gtk_dialog_add_button((GtkDialog *)new_window, "Close", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("close");
+	valdbutton   = gtk_dialog_add_button((GtkDialog *)new_window, "Remove", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Remove");
+	help_button  = gtk_dialog_add_button((GtkDialog *)new_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Help");
 
 	struct Upper_Layer_Details *t1 = ULfirst;
 	memset(buff, '\0', strlen(buff));
@@ -1858,12 +1897,12 @@ void remove_pdc (GtkButton *but, gpointer udata)
 		label = gtk_label_new (" ");
 		markup4 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No Higher Level PDC is Registered With This iPDC.</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup4);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 3, 1, 2);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 1, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 3, 1, 2);
 		gtk_widget_show (label);
 		g_free(markup4);
 
-        	label = gtk_hseparator_new();
-        	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 2, 3);
+        	label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+        	gtk_grid_attach (GTK_GRID(table), label, 0, 2, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 2, 3);
         	gtk_widget_show (label);
 	}
 	else 
@@ -1874,19 +1913,19 @@ void remove_pdc (GtkButton *but, gpointer udata)
 			memset(tmp_str,'\0',sizeof(tmp_str));
 			strcat(tmp_str, t1->ip);
                     	label = gtk_label_new (tmp_str);
-                    	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+                    	gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
                     	gtk_widget_show (label);
 
 			memset(tmp_str,'\0',sizeof(tmp_str));
 			sprintf(tmp_str, "%d", t1->port);
                     	label = gtk_label_new (tmp_str);
-                    	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+                    	gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
                     	gtk_widget_show (label);
 
 			memset(tmp_str,'\0',sizeof(tmp_str));
 			strncat(tmp_str, t1->protocol, 3);
                     	label = gtk_label_new (tmp_str);
-                    	gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+                    	gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
                     	gtk_widget_show (label);
 
                     	i++;
@@ -1899,28 +1938,34 @@ void remove_pdc (GtkButton *but, gpointer udata)
                 	label = gtk_label_new (" ");
                 	markup4 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>Destination Connections Detail</b></span>");
 	                gtk_label_set_markup (GTK_LABEL (label), markup4);
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 0, 1);
+		        gtk_grid_attach (GTK_GRID(table), label, 0, 0, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 0, 1);
 		        gtk_widget_show (label);
 		        g_free(markup4);
 
-		        label = gtk_hseparator_new();
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 1, 2);
+		        label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		        gtk_grid_attach (GTK_GRID(table), label, 0, 1, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 1, 2);
 		        gtk_widget_show (label);
 
 		        label = gtk_label_new ("IP");
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+		        gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+		        gtk_grid_attach (GTK_GRID(table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
 		        gtk_widget_show (label);
 
 		        label = gtk_label_new ("Port");
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
+		        gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+		        gtk_grid_attach (GTK_GRID(table), label, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 2, 3);
 		        gtk_widget_show (label);
 
 		        label = gtk_label_new ("Protocol");
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 2, 3);
+		        gtk_widget_set_hexpand (label, TRUE);
+  				gtk_widget_set_halign (label, GTK_ALIGN_CENTER);
+		        gtk_grid_attach (GTK_GRID(table), label, 2, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 2, 3);
 		        gtk_widget_show (label);
 
-		        label = gtk_hseparator_new();
-		        gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 3, 4);
+		        label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		        gtk_grid_attach (GTK_GRID(table), label, 0, 3, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, 3, 4);
 		        gtk_widget_show (label);
             	}
             	if (i < min_rows)
@@ -1929,15 +1974,15 @@ void remove_pdc (GtkButton *but, gpointer udata)
 		        for (jj = i; jj < min_rows; jj++)
 		        {
 				label = gtk_label_new (" ");
-				gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, jj, jj+1);
+				gtk_grid_attach (GTK_GRID(table), label, 0, jj, 3, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 3, jj, jj+1);
 				gtk_widget_show (label);
 		        }
             	}
 
 		/* Create combo box for user with some fixed values */
-		p_protocol = gtk_combo_box_new_text();
-		gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "UDP");
-		gtk_combo_box_append_text(GTK_COMBO_BOX(p_protocol), "TCP");
+		p_protocol = gtk_combo_box_text_new();
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "UDP");
+		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "TCP");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(p_protocol), 0);
         	gtk_box_pack_end (GTK_BOX (hbox1), p_protocol, FALSE, TRUE, 0);
 		gtk_widget_show (p_protocol);
@@ -1970,8 +2015,8 @@ void remove_pdc (GtkButton *but, gpointer udata)
 		/* This makes it so the button is the default. */
 		gtk_widget_set_can_default (valdbutton, TRUE);
 		gtk_widget_set_can_default (help_button, TRUE);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), valdbutton, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), help_button, TRUE, TRUE, 0);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (valdbutton);
@@ -1982,7 +2027,7 @@ void remove_pdc (GtkButton *but, gpointer udata)
 
 	g_signal_connect_swapped (close_button, "clicked", G_CALLBACK (gtk_widget_destroy), new_window);
 	gtk_widget_set_can_default (close_button, TRUE);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
 	gtk_widget_grab_default (close_button);
 	gtk_widget_show (close_button);
 
@@ -2023,32 +2068,32 @@ void connection_table (GtkButton *but, gpointer udata)
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	/* The dialog window is created with a vbox packed into it. */								
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG(new_window)->vbox), scrolled_window, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(new_window))), scrolled_window, FALSE, TRUE, 0);
 	gtk_widget_show (scrolled_window);
 
 	/* Create a table of 20 by 5 squares */
-	table = gtk_table_new (20, 5, FALSE);
+	table = gtk_grid_new (); // table = gtk_table_new (20, 5, FALSE);
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_table_set_row_spacings (GTK_TABLE (table), 8);
-	gtk_table_set_col_spacings (GTK_TABLE (table), 16);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE (table), 8);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE (table), 16);
 
 	/* Pack the table into the scrolled window */
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
 	gtk_widget_show (table);
 
 	/* Add a "close" button to the bottom of the dialog */
-	close_button = gtk_button_new_from_stock (GTK_STOCK_OK);// or GTK_STOCK_APPLY);
+	close_button = gtk_dialog_add_button((GtkDialog *)new_window, "Close", GTK_RESPONSE_CLOSE); // gtk_button_new_from_stock (GTK_STOCK_OK); // or GTK_STOCK_APPLY);
 
 	/* Print some text on lable with color and proper font */
 	label = gtk_label_new ("-");
 	markup5 = g_markup_printf_escaped ("<span foreground=\"#006666\" font='12'><b>Source Devices Connection Table\t\t</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup5);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 0, 1);
+	gtk_grid_attach (GTK_GRID(table), label, 0, 0, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 0, 1);
 	gtk_widget_show (label);
 
-    	label = gtk_hseparator_new();
-    	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 1, 2);
+    	label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+    	gtk_grid_attach (GTK_GRID(table), label, 0, 1, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 1, 2);
     	gtk_widget_show (label);
 
 	struct Lower_Layer_Details *t = LLfirst;
@@ -2060,36 +2105,36 @@ void connection_table (GtkButton *but, gpointer udata)
 		label = gtk_label_new (" ");
 		markup6 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No Lower Level PMU/PDC is Registered With This iPDC.</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup6);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 2, 3);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 2, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 2, 3);
 		gtk_widget_show (label);
 		g_free(markup6);
 
-          	label = gtk_hseparator_new();
-          	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 3, 4);
+          	label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+          	gtk_grid_attach (GTK_GRID(table), label, 0, 3, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 3, 4);
           	gtk_widget_show (label);
 	}
 	else 
 	{ 
 	        i = 2;
 		label = gtk_label_new ("ID Code");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1,i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1,i, i+1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("IP");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Port");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Protocol");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 3, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
 		gtk_widget_show (label);
 		i++;
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
 		gtk_widget_show (label);
 		i++;
 
@@ -2099,25 +2144,25 @@ void connection_table (GtkButton *but, gpointer udata)
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		sprintf(tmp_str, "%d", t->pmuid);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
             		gtk_widget_show (label);
 
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		strcpy(tmp_str, t->ip);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
             		gtk_widget_show (label);
 
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		sprintf(tmp_str, "%d", t->port);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
             		gtk_widget_show (label);
 
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		strncpy(tmp_str, t->protocol,3);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 3, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
             		gtk_widget_show (label);
 
             		i++;
@@ -2129,13 +2174,13 @@ void connection_table (GtkButton *but, gpointer udata)
 	label = gtk_label_new ("-");
 	markup7 = g_markup_printf_escaped ("<span foreground=\"#006666\" font='12'><b>\nDestination Devices Connection Table</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup7);
-	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i+2, i+3);
+	gtk_grid_attach (GTK_GRID(table), label, 0, i+2, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i+2, i+3);
 	gtk_widget_show (label);
 	g_free (markup7);
     
      	i = i+3;
-     	label = gtk_hseparator_new();
-     	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
+     	label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+     	gtk_grid_attach (GTK_GRID(table), label, 0, i, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
      	gtk_widget_show (label);
      	i++;
 	
@@ -2148,32 +2193,32 @@ void connection_table (GtkButton *but, gpointer udata)
 		label = gtk_label_new (" ");
 		markup8 = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='10'><b>No Higher Level PDC is Registered With This PDC.</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup8);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 4, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 4, i, i+1);
 		gtk_widget_show (label);
 		g_free(markup8);
 
-        	label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
+        	label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
 		gtk_widget_show (label);
 		i++;
 	}
 	else 
 	{ 
 		label = gtk_label_new ("IP");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Port");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Protocol");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+		gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
 		gtk_widget_show (label);
 		i++;
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, i, 5, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, i, i+1);
 		gtk_widget_show (label);
 		i++;
 
@@ -2182,19 +2227,19 @@ void connection_table (GtkButton *but, gpointer udata)
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		strcpy(tmp_str, t1->ip);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 0, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
             		gtk_widget_show (label);
 
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		sprintf(tmp_str, "%d", t1->port);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 1, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, i, i+1);
             		gtk_widget_show (label);
 
             		memset(tmp_str,'\0',sizeof(tmp_str));
             		strncpy(tmp_str, t1->protocol,3);
             		label = gtk_label_new (tmp_str);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 2, i, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, i, i+1);
             		gtk_widget_show (label);
 
             		i++;
@@ -2207,7 +2252,7 @@ void connection_table (GtkButton *but, gpointer udata)
 
 	/* This makes it so the button is the default. */
 	gtk_widget_set_can_default (close_button, TRUE);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
+	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (new_window)->action_area), close_button, TRUE, TRUE, 0);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (close_button);
@@ -2226,31 +2271,56 @@ void connection_table (GtkButton *but, gpointer udata)
 
 void ipdc_setup_fileSelector (GtkWidget *widget, gpointer udata)
 {
-     strcat(ipdcFolderPath,"/");
+    strcat(ipdcFolderPath,"/");
 
-	/* Create a new file selection widget */
-	ipdc_setup_window = gtk_file_selection_new ("iPDC Setup file selection");
+ //    GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 
-	/* Connect the ok_button to view_setup_file function */
-	gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (ipdc_setup_window)->ok_button), "clicked", (GtkSignalFunc) view_setup_file, ipdc_setup_window );
+	// /* Create a new file selection widget */
+	// ipdc_setup_window = gtk_file_chooser_dialog_new ("iPDC Setup file selection", NULL, action, GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL, GTK_STOCK_OK, GTK_RESPONSE_ACCEPT, NULL);
 
-	/* Connect the cancel_button to destroy the widget */
-	gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (ipdc_setup_window)->cancel_button), "clicked", (GtkSignalFunc) gtk_widget_destroy, GTK_OBJECT (ipdc_setup_window));
+	// /* Connect the ok_button to view_setup_file function */
+	// g_signal_connect_swapped (GTK_STOCK_CANCEL, "response",  G_CALLBACK(view_setup_file), ipdc_setup_window );
 
+	// /* Connect the cancel_button to destroy the widget */
+	// g_signal_connect_swapped (GTK_STOCK_CANCEL, "response", G_CALLBACK(gtk_widget_destroy), ipdc_setup_window);
+
+	// /* Lets set the filename, as if this were a save dialog, and we are giving a default filename */
+	// gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(ipdc_setup_window), ipdcFolderPath);
+
+	// gtk_widget_show(ipdc_setup_window);
+
+	GtkWidget *ipdc_setup_window;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint res;
+
+	ipdc_setup_window = gtk_file_chooser_dialog_new ("iPDC Setup file selection", GTK_WINDOW(udata), action, "Cancel", GTK_RESPONSE_CANCEL, "Open", GTK_RESPONSE_ACCEPT, NULL);
+	
 	/* Lets set the filename, as if this were a save dialog, and we are giving a default filename */
-	gtk_file_selection_set_filename (GTK_FILE_SELECTION(ipdc_setup_window), ipdcFolderPath);
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(ipdc_setup_window), ipdcFolderPath);
 
-	gtk_widget_show(ipdc_setup_window);
+	res = gtk_dialog_run (GTK_DIALOG (ipdc_setup_window));
+
+	if (res == GTK_RESPONSE_ACCEPT) {
+    	
+    	//GtkFileChooser *chooser = GTK_FILE_CHOOSER (ipdc_setup_window);
+
+    	view_setup_file(GTK_WIDGET(udata), GTK_FILE_CHOOSER (ipdc_setup_window));
+
+    	// view_setup_file(ipdc_setup_window, chooser);
+
+  	}
+
+	gtk_widget_destroy (ipdc_setup_window);
 }
 
 
 /* ----------------------------------------------------------------------------	*/
 /* FUNCTION  view_setup_file(GtkWidget *w, GtkFileSelection *fs)                */
 /* This function displays the different attributes of selected iPDC Setup File.	*/
-/* It will show the iPDC connectoin details before apply.			*/
+/* It will show the iPDC connection details before apply.			*/
 /* ----------------------------------------------------------------------------	*/
 
-void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
+void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 {
 	/* local variables */
 	GtkWidget *label, *hsep;
@@ -2266,7 +2336,7 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 	ssize_t read;
 	FILE *fp1;
 
-	s = (char *)gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs));
+	s = (char *)gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (fs));
 	strcpy(fptr, s);
 
 	gtk_widget_destroy(ipdc_setup_window);
@@ -2343,71 +2413,71 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 		/* The dialog window is created with a vbox packed into it */
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(setup_display_window)->vbox), scrolled_window, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area(GTK_DIALOG(setup_display_window))), scrolled_window, TRUE, TRUE, 0);
 		gtk_widget_show (scrolled_window);
 
 		/* Create a table of ? by 2 squares */
 		rowCount = dDevices + sDevices + 15;
-		table = gtk_table_new (rowCount, 6, FALSE);
+		table = gtk_grid_new (); // table = gtk_table_new (rowCount, 6, FALSE);
 
 		/* set the spacing to 10 on x and 10 on y */
-		gtk_table_set_row_spacings (GTK_TABLE (table), 8);
-		gtk_table_set_col_spacings (GTK_TABLE (table), 8);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE (table), 8);
+		gtk_grid_set_column_spacing (GTK_GRID(table), 8); // gtk_table_set_col_spacings (GTK_TABLE (table), 8);
 
 		/* Pack the table into the window */
-		gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+		gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
 		gtk_widget_show (table);
 
 		/* Add a "close" button to the bottom of the dialog */
-		apply_button = gtk_button_new_from_stock (GTK_STOCK_APPLY);
-		cancel_button = gtk_button_new_from_stock (GTK_STOCK_CANCEL);
+		apply_button =  gtk_dialog_add_button((GtkDialog *)setup_display_window, "apply", GTK_RESPONSE_APPLY);
+		cancel_button = gtk_dialog_add_button((GtkDialog *)setup_display_window, "cancel", GTK_RESPONSE_CLOSE);
 
 		/* This simply creates a grid of labels on the table to demonstrate the window.
 		   g_markup_printf_escaped (): function to display diffrent color and font of text on label */
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='12'><b>iPDC Setup File Details</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 0, 1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 0, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 0, 1);
 		gtk_widget_show (label);
 		g_free (markup);
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 1, 2);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, 1, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 1, 2);
 		gtk_widget_show (label);
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#0000FF\" font='12'>iPDC Server </span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 2, 3);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 2, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 2, 3);
 		gtk_widget_show (label);
 		g_free (markup);
 
 		label = gtk_label_new ("iPDC ID");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("UDP Port");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("TCP Port");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 2, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server IP");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 3, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("DB Server Port");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 4, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, 3, 4);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Wait Time-μs");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, 3, 4);
+		gtk_grid_attach (GTK_GRID(table), label, 5, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, 3, 4);
 		gtk_widget_show (label);
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 4, 5);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, 4, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 4, 5);
 		gtk_widget_show (label);
 
 		/* This simply read from file and print on label in the table. */
@@ -2415,36 +2485,36 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 
 		getline(&rline, &len, fp1);
 		label = gtk_label_new (rline);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
 		gtk_widget_show (label);
 
 		getline(&rline, &len, fp1);
 		label = gtk_label_new (rline);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 1, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 5, 6);
 		gtk_widget_show (label);
 
 		getline(&rline, &len, fp1);
 		label = gtk_label_new (rline);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 2, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 5, 6);
 		gtk_widget_show (label);
 
 		getline(&rline, &len, fp1);
 		label = gtk_label_new (rline);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 3, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, 5, 6);
 		gtk_widget_show (label);
 
 		/* This is print static text (9000) on label in the table. */
 		label = gtk_label_new ("9000");
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 4, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, 5, 6);
 		gtk_widget_show (label);
 
 		getline(&rline, &len, fp1);
 		label = gtk_label_new (rline);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, 5, 6);
+		gtk_grid_attach (GTK_GRID(table), label, 5, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, 5, 6);
 		gtk_widget_show (label);
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 5, 6);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, 5, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 5, 6);
 		gtk_widget_show (label);
 
 		getline(&rline, &len, fp1);  //To read 'LowerDevices' line
@@ -2452,39 +2522,39 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#0000FF\" font='11'>Source Devices </span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 7, 8);
+		gtk_grid_attach (GTK_GRID(table), label, 0, 7, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 7, 8);
 		gtk_widget_show (label);
 		g_free (markup);
 
 		sprintf(buff, "Measurement Received From Total : %d Devices", sDevices);
 		label = gtk_label_new (buff);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 8, 9 );
+		gtk_grid_attach (GTK_GRID(table), label, 0, 8, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 8, 9 );
 		gtk_widget_show (label);
 
         	rowi = 9;
 	        if (sDevices > 0)
 	        {
             		label = gtk_label_new ("Source ID");
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 1, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		label = gtk_label_new ("Source IP");
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 2, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		label = gtk_label_new ("Port");
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 3, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		label = gtk_label_new ("Protocol");
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 4, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		rowi = rowi+1;
         	}
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, rowi, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 
 		rowi = rowi+1;
@@ -2497,29 +2567,29 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 
             		d1 = strtok (rline,",");
             		label = gtk_label_new (d1);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 1, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		d1 = strtok (NULL,",");
             		label = gtk_label_new (d1);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 2, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		d1 = strtok (NULL,",");
             		label = gtk_label_new (d1);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 3, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		d1 = strtok (NULL,"\n");
             		label = gtk_label_new (d1);
-            		gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, rowi, rowi+1);
+            		gtk_grid_attach (GTK_GRID(table), label, 4, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 4, 5, rowi, rowi+1);
             		gtk_widget_show (label);
 
             		rowi = rowi + 1;
         	}
 
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, rowi, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 
 		rowi = rowi+1;
@@ -2528,7 +2598,7 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#0000FF\" font='11'>Destination Devices</span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, rowi, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 		g_free (markup);
 
@@ -2536,29 +2606,29 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 
 		sprintf(buff, "Consolidated Measurement Provided To Total : %d Devices", dDevices);
 		label = gtk_label_new (buff);
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+		gtk_grid_attach (GTK_GRID(table), label, 0, rowi, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 
 		rowi = rowi + 1;
 		if (dDevices > 0)
 		{
 		    	label = gtk_label_new ("Destination IP");
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 1, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	label = gtk_label_new ("Port");
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 2, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	label = gtk_label_new ("Protocol");
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 3, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	rowi = rowi + 1;
 		}
 	
-		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		gtk_grid_attach (GTK_GRID(table), label, 0, rowi, 6, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 		rowi = rowi+1;
 
@@ -2569,24 +2639,24 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 
 		    	d1 = strtok (rline,",");
 		    	label = gtk_label_new (d1);
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 1, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	d1 = strtok (NULL,",");
 		    	label = gtk_label_new (d1);
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 2, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	d1 = strtok (NULL,"\n");
 		    	label = gtk_label_new (d1);
-		    	gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
+		    	gtk_grid_attach (GTK_GRID(table), label, 3, rowi, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, rowi, rowi+1);
 		    	gtk_widget_show (label);
 
 		    	rowi = rowi + 1;
         	}
 
-/*		label = gtk_hseparator_new();
-		gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
+/*		label = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL); // label = gtk_hseparator_new();
+		// gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, rowi, rowi+1);
 		gtk_widget_show (label);
 */		rowi = rowi+1;
 		fclose(fp1);
@@ -2598,8 +2668,8 @@ void view_setup_file (GtkWidget *w, GtkFileSelection *fs)
 		/* This makes it so the ok_button is the default. */
 		gtk_widget_set_can_default (cancel_button, TRUE);
 		gtk_widget_set_can_default (apply_button, TRUE);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), apply_button, TRUE, TRUE, 0);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), cancel_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), apply_button, TRUE, TRUE, 0);
+		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), cancel_button, TRUE, TRUE, 0);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (cancel_button);

@@ -48,7 +48,7 @@
 #include  "ShearedMemoryStructure.h"
 
 /* Common fixed path for storage of few common files */
-#define UI_fILE "/usr/local/share/PMU/pmu.xml"
+#define UI_fILE "/usr/local/share/PMU/pmu.glade"
 
 
 /* ---------------------------------------------------------------- */
