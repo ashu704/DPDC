@@ -1,28 +1,5 @@
 /* ----------------------------------------------------------------------------- 
- * ipdc.c
- *
- * iPDC - Phasor Data Concentrator
- *
- * Copyright (C) 2011-2012 Nitesh Pandit
- * Copyright (C) 2011-2012 Kedar V. Khandeparkar
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
- * Authors: 
- *		Nitesh Pandit <panditnitesh@gmail.com>
- *		Kedar V. Khandeparkar <kedar.khandeparkar@gmail.com>			
+ * dpdc.c
  *
  * ----------------------------------------------------------------------------- */
 
@@ -44,10 +21,10 @@
 #include "connections.h"
 #include "parser.h"
 #include "global.h"
-#include "ipdcGui.h"
+#include "dpdcGui.h"
 
 /* Common fixed path for storage of few common files */
-#define UI_fILE "/usr/local/share/iPDC/iPDC.glade"
+#define UI_fILE "/usr/local/share/DPDC/DPDC.glade"
 
 
 /* ---------------------------------------------------------------- */
@@ -88,7 +65,7 @@ int main(int argc, char **argv)
 
 	/* Get objects from UI */
 	#define GW(name) CH_GET_WIDGET(builder, name, data)
-		GW(ipdc);
+		GW(dpdc);
 		GW(add_pmu_button);
 		GW(remove_pmu_button);
 		GW(cmd_data_off_button);
@@ -101,7 +78,7 @@ int main(int argc, char **argv)
 		GW(exit_button);
 		GW(menubar);
 		GW(menuitem2);
-		GW(open_ipdc_setup);
+		GW(open_dpdc_setup);
 		GW(pdc_details_menuitem);
 		GW(menu_add_source);
 		GW(menu_remove_source);
@@ -125,15 +102,15 @@ int main(int argc, char **argv)
 	gtk_builder_connect_signals(builder, NULL);
 
      // Changes how a toplevel window deals with its size request and user resize attempts. 
-     gtk_window_set_default_size (GTK_WINDOW (data->ipdc),710, 590);
-     gtk_window_set_resizable(GTK_WINDOW (data->ipdc), TRUE);
-     gtk_window_set_position(GTK_WINDOW(data->ipdc), GTK_WIN_POS_CENTER);
-     gtk_window_set_icon(GTK_WINDOW(data->ipdc), create_pixbuf("/usr/local/share/iPDC/images/logo.png"));
+     gtk_window_set_default_size (GTK_WINDOW (data->dpdc),710, 590);
+     gtk_window_set_resizable(GTK_WINDOW (data->dpdc), TRUE);
+     gtk_window_set_position(GTK_WINDOW(data->dpdc), GTK_WIN_POS_CENTER);
+     gtk_window_set_icon(GTK_WINDOW(data->dpdc), create_pixbuf("/usr/local/share/DPDC/images/logo.png"));
 
      /* Set the Title of Main Window */
-	gtk_window_set_title (GTK_WINDOW (data->ipdc), "iPDC");
+	gtk_window_set_title (GTK_WINDOW (data->dpdc), "DPDC");
 
-	/* Disable all the (mentioned) buttons on main ipdc window */
+	/* Disable all the (mentioned) buttons on main dpdc window */
 	gtk_widget_set_sensitive(GTK_WIDGET(data->add_pmu_button), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(data->remove_pmu_button), FALSE);
 	gtk_widget_set_sensitive(GTK_WIDGET(data->cmd_data_off_button), FALSE);
@@ -147,11 +124,11 @@ int main(int argc, char **argv)
 	gtk_widget_set_visible(GTK_WIDGET(data->menu_conn_table), FALSE);
 	gtk_widget_set_visible(GTK_WIDGET(data->pdc_details_menuitem), FALSE);
 
-	memset(ipdcFilePath, '\0', 200);
+	memset(dpdcFilePath, '\0', 200);
      	ptr1 = malloc(200*sizeof(char));
      	memset(ptr1, '\0', 200);
 
-	/* Get the user's name for storing the iPDC Setup File */
+	/* Get the user's name for storing the DPDC Setup File */
 	strcpy(ptr1,getenv ("HOME"));
 
 	if (ptr1 == NULL)
@@ -159,22 +136,22 @@ int main(int argc, char **argv)
 		printf("user not found\n");
 		exit(1);
 	}
-	strcat(ptr1, "/iPDC");
+	strcat(ptr1, "/DPDC");
 
-	if(stat(ptr1,&st) == 0)	/* If main iPDC folder not present in the system? */
+	if(stat(ptr1,&st) == 0)	/* If main DPDC folder not present in the system? */
 	{
-		strcat(ptr1, "/iPDC");
+		strcat(ptr1, "/DPDC");
 
 		if(stat(ptr1,&st) == 0)
 		{
-			strcat(ipdcFolderPath, ptr1);
+			strcat(dpdcFolderPath, ptr1);
 
 			FILE * output;
 			int check;
 			char buff[200], is_empty[100];
 
 			strcpy(buff, "ls ");
-			strcat(buff, ipdcFolderPath);
+			strcat(buff, dpdcFolderPath);
 			strcat(buff, " | wc -l");
 
 			output = popen(buff,"r");
@@ -185,9 +162,9 @@ int main(int argc, char **argv)
 
 			if (check == 0) //No Setup files are present
 			{
-				gtk_widget_set_visible(GTK_WIDGET(data->open_ipdc_setup), FALSE);
+				gtk_widget_set_visible(GTK_WIDGET(data->open_dpdc_setup), FALSE);
 
-				/* fill the iPDC details */
+				/* fill the DPDC details */
 				fill_pdc_details (NULL);
 			}
 			else
@@ -195,10 +172,10 @@ int main(int argc, char **argv)
 				char ch[300];
 
 				//ptr1 = getenv ("HOME");
-				strcpy(ch, "Fill the iPDC setup details manualy or open the iPDC setup file\nfrom the ");
+				strcpy(ch, "Fill the DPDC setup details manualy or open the DPDC setup file\nfrom the ");
 				//strcat(ch, ptr1);
 				//strcat(ch, "/");
-				strcat(ch, ipdcFolderPath);
+				strcat(ch, dpdcFolderPath);
 
 				//validation_result (ch);
 			}
@@ -207,15 +184,15 @@ int main(int argc, char **argv)
 		{
 			if (mkdir (ptr1, 0700))
 			{
-				printf ("Cannot create directory `%s': %s\n", ipdcFolderPath, strerror (errno));
-				validation_result ("Cannot create iPDC directory on proposed path! ");
+				printf ("Cannot create directory `%s': %s\n", dpdcFolderPath, strerror (errno));
+				validation_result ("Cannot create DPDC directory on proposed path! ");
 			}
 			else
 			{
-				strcat(ipdcFolderPath, ptr1);
-				gtk_widget_set_visible(GTK_WIDGET(data->open_ipdc_setup), FALSE);
+				strcat(dpdcFolderPath, ptr1);
+				gtk_widget_set_visible(GTK_WIDGET(data->open_dpdc_setup), FALSE);
 
-				/* fill the iPDC details */
+				/* fill the DPDC details */
 				fill_pdc_details (NULL);
 			}
 		}
@@ -224,31 +201,29 @@ int main(int argc, char **argv)
 	{
 		if (mkdir (ptr1, 0700))
 		{
-			printf ("Cannot create directory `%s': %s", ipdcFolderPath, strerror (errno));
-			validation_result ("Cannot create iPDC directory on proposed path! ");
+			printf ("Cannot create directory `%s': %s", dpdcFolderPath, strerror (errno));
+			validation_result ("Cannot create DPDC directory on proposed path! ");
 		}
 		else
 		{
-			strcat(ptr1, "/iPDC");
+			strcat(ptr1, "/DPDC");
 
 			if (mkdir (ptr1, 0700))
 			{
-				printf ("Cannot create directory `%s': %s", ipdcFolderPath, strerror (errno));
-				validation_result ("Cannot create iPDC sub-directory on proposed path! ");
+				printf ("Cannot create directory `%s': %s", dpdcFolderPath, strerror (errno));
+				validation_result ("Cannot create DPDC sub-directory on proposed path! ");
 			}
 			else
 			{
-				strcat(ipdcFolderPath, ptr1);
-				gtk_widget_set_visible(GTK_WIDGET(data->open_ipdc_setup), FALSE);
+				strcat(dpdcFolderPath, ptr1);
+				gtk_widget_set_visible(GTK_WIDGET(data->open_dpdc_setup), FALSE);
 
-				/* fill the iPDC details */
+				/* fill the DPDC details */
 				fill_pdc_details (NULL);
 			}
 		}
 	}
 
-	/* Decorate the main window of iPDC */
-	ipdc_colors();
 
 	/* Signals Definitions*/
 	g_signal_connect (data->add_pmu_button, "clicked", G_CALLBACK(add_pmu), NULL);
@@ -276,18 +251,18 @@ int main(int argc, char **argv)
 	g_signal_connect (data->menu_conn_table, "activate", G_CALLBACK(connection_table), NULL);
 
 	g_signal_connect (data->exit_button, "clicked", G_CALLBACK(destroy), NULL);
-	g_signal_connect (data->open_ipdc_setup, "activate", G_CALLBACK(ipdc_setup_fileSelector), NULL);
+	g_signal_connect (data->open_dpdc_setup, "activate", G_CALLBACK(dpdc_setup_fileSelector), NULL);
 	g_signal_connect (data->pdc_details_menuitem, "activate", G_CALLBACK(display_pdc_detail), NULL);
 	g_signal_connect_swapped (data->enter_pdc_detail_menuitem, "activate", G_CALLBACK(fill_pdc_details), NULL);
 	g_signal_connect (data->exit_menuitem, "activate", G_CALLBACK(destroy), NULL);
-	g_signal_connect (data->about_menuitem, "activate", G_CALLBACK(about_ipdc), NULL);
-	g_signal_connect (data->ipdc, "destroy", G_CALLBACK(destroy), NULL);
+	g_signal_connect (data->about_menuitem, "activate", G_CALLBACK(about_dpdc), NULL);
+	g_signal_connect (data->dpdc, "destroy", G_CALLBACK(destroy), NULL);
 
 	/* Destroy builder, since we don't need it anymore */
 	g_object_unref(G_OBJECT(builder));
 
 	/* Show window. All other widgets are automatically shown by GtkBuilder */
-	gtk_widget_show(data->ipdc);
+	gtk_widget_show(data->dpdc);
 
 /*	pthread_t t;
 	if((err = pthread_create(&t,NULL,display_time,NULL))) 

@@ -1,29 +1,5 @@
 /* ----------------------------------------------------------------------------- 
  * PmuGui.c
- * 
- * PMU Simulator - Phasor Measurement Unit Simulator
- *
- * Copyright (C) 2011-2012 Nitesh Pandit
- * Copyright (C) 2011-2012 Kedar V. Khandeparkar
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
- * Authors: 
- *		Nitesh Pandit <panditnitesh@gmail.com>
- *		Kedar V. Khandeparkar <kedar.khandeparkar@gmail.com>			
- *
  * ----------------------------------------------------------------------------- */
 
 
@@ -59,15 +35,14 @@
 /*	4. void about_pmu (GtkButton *widget, gpointer udata);			          */
 /*	5. void Pmu_Help (GtkButton *but, gpointer udata);			          */
 /*	6. void validation_result (char *msg);					               */
-/*	7. void pmu_colors();							                    */
-/*	8. int  validation_pmu_server (GtkButton *button, gpointer udata);	     */
-/*	9. void pmu_server ();							                    */
-/*	10. void manage_data_sources();						               */
-/*	11. void Set_data_source(GtkWidget *widget, gpointer udata);		     */
-/*	12. void file_ok_sel(GtkWidget *w, GtkFileSelection *fs);		          */
-/*   13. void pmu_setup_file_selection(GtkWidget *widget, gpointer udata);      */
-/*   14. void view_setup_file (GtkWidget *w, GtkFileSelection *fs);             */
-/*   15. void apply_pmu_setup (GtkWidget *w, gpointer udata);                   */
+/*	7. int  validation_pmu_server (GtkButton *button, gpointer udata);	     */
+/*	8. void pmu_server ();							                    */
+/*	9. void manage_data_sources();						               */
+/*	10. void Set_data_source(GtkWidget *widget, gpointer udata);		     */
+/*	11. void file_ok_sel(GtkWidget *w, GtkFileSelection *fs);		          */
+/*  12 void pmu_setup_file_selection(GtkWidget *widget, gpointer udata);      */
+/*  13. void view_setup_file (GtkWidget *w, GtkFileSelection *fs);             */
+/*  14. void apply_pmu_setup (GtkWidget *w, gpointer udata);                   */
 /*                                                                              */
 /* ---------------------------------------------------------------------------- */
 
@@ -140,22 +115,22 @@ void destroy (GtkWidget *widget, gpointer udata)
 
 void about_pmu (GtkButton *widget, gpointer udata)
 {
-     GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("/usr/local/share/PMU/images/PmuLogo1.png",0);
+    GdkPixbuf *pixbuf = gdk_pixbuf_new_from_file("/usr/local/share/PMU/images/PmuLogo1.png",0);
 
-	const gchar *auth[] = {"\nDr. A.M. Kulkarni <http://www.ee.iitb.ac.in/wiki/faculty/anil>", "\nNitesh Pandit <panditnitesh@gmail.com>", "\nKedar V. Khandeparkar <kedar.khandeparkar@gmail.com>", NULL};
+	const gchar *auth[] = {"\nDr. S. Moorthi <https://www.nitt.edu/home/academics/departments/eee/people/faculty/assocprof/moorthi/>", "\nAshutosh Sharma <https://www.linkedin.com/in/ashu704/>", "\nAyush Agrawal <https://www.linkedin.com/in/ayush-agrawal-559006172/>", NULL};
 
 	/* Create a about dialog for displaying about the iPDC. */
 	about_dialog = gtk_about_dialog_new ();
 
 	/* Define the diffrent properties of about_dialog. */
 	gtk_about_dialog_set_program_name ((GtkAboutDialog *)about_dialog, " ");
-	gtk_about_dialog_set_comments ((GtkAboutDialog *)about_dialog, "Authors :\nNitesh Pandit\nKedar Khandeparkar\n\nWide Aera Measurement System\nDepartment of Electrical Engineering\nIndian Institute of Technology, Bombay\nMumbai, INDIA");
+	gtk_about_dialog_set_comments ((GtkAboutDialog *)about_dialog, "Authors :\nAshutosh Sharma\nAyush Agrawal\n\nWide Area Measurement System\nDepartment of Electrical & Electronics Engineering\nNational Institute of Technology, Tiruchirappalli\nTiruchirappalli, INDIA");
 
-	gtk_about_dialog_set_license ((GtkAboutDialog *)about_dialog, "iPDC - A Phasor Data Concentrator & PMU Simulator\n\nGeneral Public License (GPL)\n\nAuthors:\n\t\tNitesh Pandit <panditnitesh@gmail.com>\n\t\tKedar V. Khandeparkar <kedar.khandeparkar@gmail.com>\n\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n");
+	gtk_about_dialog_set_license ((GtkAboutDialog *)about_dialog, "iPDC - A Phasor Data Concentrator & PMU Simulator\n\nGeneral Public License (GPL)\n\nAuthors:\n\t\tAyush Agrawal <ayushagrawal049@gmail.com>\n\t\tAshutosh Sharma <ashutosh89393@gmail>\n\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n");
 
-     gtk_about_dialog_set_logo ((GtkAboutDialog *)about_dialog, pixbuf);
-	gtk_about_dialog_set_website ((GtkAboutDialog *)about_dialog, "http://ipdc.codeplex.com/");
-	gtk_about_dialog_set_copyright ((GtkAboutDialog *)about_dialog, "Copyright (C) 2011-2012 GPL3");
+    gtk_about_dialog_set_logo ((GtkAboutDialog *)about_dialog, pixbuf);
+	gtk_about_dialog_set_website ((GtkAboutDialog *)about_dialog, "https://github.com/ashu704/iPDC");
+	gtk_about_dialog_set_copyright ((GtkAboutDialog *)about_dialog, "Copyright (C) 2020-2021 GPL3");
 	gtk_about_dialog_set_authors ((GtkAboutDialog *)about_dialog, auth);
 
 	/* Ensure that the dialog box is destroyed when the user responds */
@@ -182,7 +157,6 @@ void Pmu_Help (GtkButton *but, gpointer udata)
 	/* Create the widgets */
 	help_dialog = gtk_about_dialog_new ();
 
-	//GtkWidget *image1 = gtk_image_new_from_file("pdcIMG.jpg");
 	gtk_about_dialog_set_program_name ((GtkAboutDialog *)help_dialog, "PMU HELP\n\n");
 	gtk_about_dialog_set_comments ((GtkAboutDialog *)help_dialog, "1) ID Code should be integer i.e. 50, 60, etc.\t\t\t\n\n2) Port should be greater than 1500 and less than 65535.\t\n\n3) Channel Name could be upto 16 characters.\t\t\t\n\n4) Enter the integer value for phasors, analogs and digitals.\n\n5) Fixed/Floating point and Rectangular/Polar are the\t\trepresentation of measurements.");
 
@@ -215,49 +189,6 @@ void validation_result (char *msg)
 	gtk_widget_show_all (val_dialog);
 };
 
-
-/* ----------------------------------------------------------------------------	*/
-/* FUNCTION  pmu_colors()							                    */
-/* It fills the colors in text on lables and set the images on given buttons. 	*/
-/* It called in main only one time to initialized all the parameters.		     */
-/* ----------------------------------------------------------------------------	*/
-
-void pmu_colors()
-{
-	/* Set the font and color for the heading on 'welcome_pmu' lable */
-//	markup = g_markup_printf_escaped ("<span foreground=\"#006666\" font='16'><b>Phasor Measurement Unit\n\t  PMU Simulator</b></span>");
-//	gtk_label_set_markup (GTK_LABEL (pmu_data->welcome_pmu), markup);
-//	g_free (markup);
-
-	// markup = g_markup_printf_escaped ("<span foreground=\"#330000\" font='10'><b>\n---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</b></span>");
-
-	// gtk_label_set_markup (GTK_LABEL (pmu_data->footer_label), markup);
-	// g_free (markup);
-
-	// markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='10'><b>Admin Operations</b></span>");
-	// gtk_label_set_markup (GTK_LABEL (pmu_data->admin_label), markup);
-	// g_free (markup);
-
-	// markup = g_markup_printf_escaped ("<span foreground=\"#330000\" font='8'>All Rights Reserved</span>");
-	// gtk_label_set_markup (GTK_LABEL (pmu_data->rights_lable), markup);
-	// g_free (markup);
-
-	/* Add a "close" button to the bottom of the dialog */ 
-	// GdkColor color;
-	//GtkWidget *image, *image1;
-	// gdk_color_parse( "#999999", &color ); 
-	// gtk_widget_modify_bg( GTK_WIDGET(pmu_data->img_label), GTK_STATE_NORMAL, &color );
-
-	/* Set the general image on a button */
-	// image = gtk_image_new_from_file("/usr/local/share/PMU/images/PSLab.PNG");
-	// gtk_button_set_image ((GtkButton *)pmu_data->img_label, image);
-	// gtk_widget_show (pmu_data->img_label);
-
-	/* Set the image (PMU-logo) on a specific button */
-	// image1 = gtk_image_new_from_file("/usr/local/share/PMU/images/PmuLogo.png");
-	// gtk_button_set_image ((GtkButton *)pmu_data->logo_butun, image1);
-	// gtk_widget_show (pmu_data->logo_butun);
-};
 
 
 /* ----------------------------------------------------------------------------	*/
@@ -344,57 +275,56 @@ void pmu_server ()
 	gtk_container_set_border_width (GTK_CONTAINER (pmu_server_window), 10);
 
 	/* Create a table of 4 by 2 squares. */
-	table = gtk_grid_new (); // table = gtk_table_new (6, 2, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 50 on x and 5 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 16); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 16); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 16); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 16); 
 
 	/* Pack the table into the window */
-	//gtk_box_pack_start (GTK_BOX (GTK_DIALOG(pmu_server_window)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(pmu_server_window))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	/* Add few buttons to the bottom of the dialog */
-	valdbutton = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Run", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Run");
-	help_button = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Help", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Help");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Cancel", GTK_RESPONSE_CLOSE); //gtk_button_new_with_label ("Cancel");
+	valdbutton = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Run", GTK_RESPONSE_OK); 
+	help_button = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Help", GTK_RESPONSE_APPLY);
+	cancel_button = gtk_dialog_add_button((GtkDialog *)pmu_server_window, "Cancel", GTK_RESPONSE_CLOSE); 
 
 	/* This simply creates a grid of toggle buttons on the table */
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Enter PMU Server Details</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	label = gtk_label_new ("Server Port");
-     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     	
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 1, 1); 
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Protocol");
-     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     	
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 3, 1, 1); 
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	p_port = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_port, 5);
-	gtk_grid_attach (GTK_GRID (table), p_port, 1, 2, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_port, 1, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), p_port, 1, 2, 1, 1); 
 	gtk_widget_show (p_port);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Use the unreserved ports for PMU Server.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     	
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
@@ -403,7 +333,7 @@ void pmu_server ()
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "UDP");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_protocol), "TCP");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_protocol), 0);
-	gtk_grid_attach (GTK_GRID (table), p_protocol, 1, 3, 1, 1); // gtk_table_attach_defaults (GTK_TABLE (table), p_protocol, 1, 2, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), p_protocol, 1, 3, 1, 1); 
 	gtk_widget_show (p_protocol);
 
 	/* Signal handling for buttons on PMU Server Setup Window */
@@ -415,10 +345,7 @@ void pmu_server ()
 	/* This makes it so the button is the default. */
 	gtk_widget_set_can_default (valdbutton, TRUE);
 	gtk_widget_set_can_default (help_button, TRUE);
-	gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmu_server_window)->action_area), valdbutton, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmu_server_window)->action_area), help_button, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (pmu_server_window)->action_area), cancel_button, TRUE, TRUE, 0);	    
+	gtk_widget_set_can_default (cancel_button, TRUE);	    
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (valdbutton);
@@ -455,17 +382,16 @@ void manage_data_sources()
 	//gtk_widget_set_size_request (data_managing_window, 350, 350);
 
 	/* Create a table of 4 by 2 squares */
-	table = gtk_grid_new (); // table = gtk_table_new (6, 2, FALSE);
+	table = gtk_grid_new (); 
 	
 	/* Deactivate manage data source */
 	gtk_window_set_modal (GTK_WINDOW (data_managing_window), TRUE);
         gtk_window_set_keep_above(GTK_WINDOW (data_managing_window), TRUE);
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(data_managing_window)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(data_managing_window))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
@@ -473,13 +399,13 @@ void manage_data_sources()
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Select Measurement Source</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
 	
-	gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add few radio buttons on the dialog window */
 	Addbutton = gtk_radio_button_new_with_label (NULL, "Auto Genetared");
-	gtk_grid_attach (GTK_GRID (table), Addbutton, 0,2,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), Addbutton, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), Addbutton, 0,2,1,1); 
      if (ShmPTR->dataFileVar == 0 )
      {
           gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (Addbutton), TRUE);
@@ -487,7 +413,7 @@ void manage_data_sources()
      gtk_widget_show (Addbutton);
 
 	Removebutton = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (Addbutton), "Measurement File");
-	gtk_grid_attach (GTK_GRID (table), Removebutton, 0,3,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), Removebutton, 0, 1, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), Removebutton, 0,3,1,1); 
      if (ShmPTR->dataFileVar == 1 )
      {
           gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (Removebutton), TRUE);
@@ -497,12 +423,12 @@ void manage_data_sources()
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Auto Genetared Data may be raw measurements.\nMay use CSV file of Phasor measurements.\nFor CSV file format see our Sample measurements files.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0,5,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), label, 0,5,2,1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add 'Close' buttons on the dialog window */
-	close_butn = gtk_dialog_add_button((GtkDialog *)data_managing_window, "Close", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("Close");
+	close_butn = gtk_dialog_add_button((GtkDialog *)data_managing_window, "Close", GTK_RESPONSE_CLOSE); 
 
 	/* Signal handling for buttons on Option Window */
 	g_signal_connect (Addbutton, "toggled", G_CALLBACK (Set_data_source), (gpointer) "1");
@@ -511,8 +437,8 @@ void manage_data_sources()
 	g_signal_connect_swapped (data_managing_window, "response", G_CALLBACK (gtk_widget_destroy), data_managing_window);
 
 	/* This makes it so the button is the default. */
-	// gtk_widget_set_can_default (close_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (data_managing_window)->action_area), close_butn, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (close_butn, TRUE);
+	
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (close_butn);
@@ -552,8 +478,7 @@ void Set_data_source(GtkRadioButton *radiobutton, gpointer udata)
     {
         gtk_widget_destroy(data_managing_window);
 
-        /* Create a new file selection widget */
-        //data_managing_window = gtk_file_selection_new ("PMU simulator measurement file selection");
+        /* Create a new file chooser dialog */
 
          data_managing_window = gtk_file_chooser_dialog_new ("PMU Simulator measurement file selection",
                 NULL,
@@ -561,14 +486,8 @@ void Set_data_source(GtkRadioButton *radiobutton, gpointer udata)
                 "_Open", GTK_RESPONSE_ACCEPT,
                 "_Cancel", GTK_RESPONSE_CANCEL, NULL);
 
-        /* Connect the ok_button to file_ok_sel function */
-        //gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (data_managing_window)->ok_button), "clicked", (GtkSignalFunc) file_ok_sel, data_managing_window );
-
-        /* Connect the cancel_button to destroy the widget */
-        //gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (data_managing_window)->cancel_button), "clicked", (GtkSignalFunc) gtk_widget_destroy, GTK_OBJECT (data_managing_window));
-
+        
         /* Lets set the filename, as if this were a save dialog, and we are giving a default filename */
-        //gtk_file_selection_set_filename (GTK_FILE_SELECTION(data_managing_window), ptr1);
         gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(data_managing_window), file_path);
 
         event = gtk_dialog_run( GTK_DIALOG(data_managing_window ) );
@@ -665,19 +584,6 @@ void pmu_setup_file_selection(GtkWidget *widget, gpointer udata)
     strcpy(file_path,getenv("HOME"));
     strcat(file_path,"/iPDC/PMU/");
 
-	/* Create a new file selection widget */
-	// pmu_setup_window = gtk_file_selection_new ("PMU Setup File Selector");
-
-	// /* Connect the ok_button to view_setup_file function */
-	// gtk_signal_connect (GTK_OBJECT (GTK_FILE_SELECTION (pmu_setup_window)->ok_button), "clicked", (GtkSignalFunc) view_setup_file, pmu_setup_window);
-
-	// /* Connect the cancel_button to destroy the widget */
-	// gtk_signal_connect_object (GTK_OBJECT (GTK_FILE_SELECTION (pmu_setup_window)->cancel_button), "clicked", (GtkSignalFunc) gtk_widget_destroy,
-	// 		GTK_OBJECT (pmu_setup_window));
-
-	// /* Lets set the filename, as if this were a save dialog, and we are giving a default filename */
-	// gtk_file_selection_set_filename (GTK_FILE_SELECTION(pmu_setup_window), ptr1);
-
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 
 	gint event;
@@ -742,118 +648,117 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 		//gtk_widget_set_size_request (setup_display_window, 350, 400);
 
 		/* Create a table of ? by 2 squares */
-		table = gtk_grid_new (); // gtk_table_new (17, 2, FALSE);
+		table = gtk_grid_new (); 
 
 		/* set the spacing to 10 on x and 10 on y */
-		gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-		gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+		gtk_grid_set_column_spacing (GTK_GRID(table), 2);
 
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(setup_display_window)->vbox), table, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(setup_display_window))), table, TRUE, TRUE, 0);
 		gtk_widget_show (table);
 
 		/* Add a "close" button to the bottom of the dialog */
-		apply_button = gtk_dialog_add_button((GtkDialog *)setup_display_window, "Apply", GTK_RESPONSE_APPLY); // gtk_button_new_with_label ("Apply");
-		cancel_button = gtk_dialog_add_button((GtkDialog *)setup_display_window, "Cancel", GTK_RESPONSE_CLOSE); // gtk_button_new_with_label ("cancel");
+		apply_button = gtk_dialog_add_button((GtkDialog *)setup_display_window, "Apply", GTK_RESPONSE_APPLY); 
+		cancel_button = gtk_dialog_add_button((GtkDialog *)setup_display_window, "Cancel", GTK_RESPONSE_CLOSE);
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#7D2252\" font='12'><b>PMU Setup File Details</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+		gtk_grid_attach (GTK_GRID (table), label, 0,0,2,1);
 		gtk_widget_show (label);
 		g_free (markup);
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#0000FF\" font='12'>Server Info</span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0,2,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 2, 3);
+		gtk_grid_attach (GTK_GRID (table), label, 0,2,2,1); 
 		gtk_widget_show (label);
 		g_free (markup);
 
 		label = gtk_label_new ("PMU Port");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,3,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+		gtk_grid_attach (GTK_GRID (table), label, 0,3,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Protocol");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,4,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
+		gtk_grid_attach (GTK_GRID (table), label, 0,4,1,1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#0000FF\" font='12'>Configuration Info</span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0,6,2,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 6, 7);
+		gtk_grid_attach (GTK_GRID (table), label, 0,6,2,1); 
 		gtk_widget_show (label);
 		g_free (markup);
 
 		label = gtk_label_new ("PMU ID");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,7,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 7, 8);
+		gtk_grid_attach (GTK_GRID (table), label, 0,7,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Station Name");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,8,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 8, 9);
+		gtk_grid_attach (GTK_GRID (table), label, 0,8,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Pasor Number");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,9,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 9, 10);
+		gtk_grid_attach (GTK_GRID (table), label, 0,9,1,1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Analog Number");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,10,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 10, 11);
+		gtk_grid_attach (GTK_GRID (table), label, 0,10,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Digital Number");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,11,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 11, 12);
+		gtk_grid_attach (GTK_GRID (table), label, 0,11,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Format Word");
-	     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,12,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 12, 13);
+		gtk_grid_attach (GTK_GRID (table), label, 0,12,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("CFG Count");
-	     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     	
 	     	gtk_label_set_xalign (GTK_LABEL (label),0);
     	 	gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,13,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 13, 14);
+		gtk_grid_attach (GTK_GRID (table), label, 0,13,1,1);
 		gtk_widget_show (label);
 
 		label = gtk_label_new ("Data Rate ");
-	     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     	
 	     	gtk_label_set_xalign (GTK_LABEL (label),0);
     	 	gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,14,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 14, 15);
+		gtk_grid_attach (GTK_GRID (table), label, 0,14,1,1); 
 		gtk_widget_show (label);
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Configuration information of selected PMU Setup file.</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-	     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	     	
 	     gtk_label_set_xalign (GTK_LABEL (label),0);
     	 gtk_label_set_yalign (GTK_LABEL (label),0);
-		gtk_grid_attach (GTK_GRID (table), label, 0,16,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 16, 17);
+		gtk_grid_attach (GTK_GRID (table), label, 0,16,1,1); 
 		gtk_widget_show (label);
 		g_free (markup);
 
@@ -868,13 +773,13 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 			if(tempi == 1)
 			{
 				label = gtk_label_new (rline);
-				gtk_grid_attach (GTK_GRID (table), label, 1,3,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 3, 4);
+				gtk_grid_attach (GTK_GRID (table), label, 1,3,1,1); 
 				gtk_widget_show (label);
 			}
 			else if(tempi == 2)
 			{
 				label = gtk_label_new (rline);
-				gtk_grid_attach (GTK_GRID (table), label, 1,4,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 4, 5);
+				gtk_grid_attach (GTK_GRID (table), label, 1,4,1,1); 
 				gtk_widget_show (label);
 			}
 
@@ -904,7 +809,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 1,7,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 7, 8);
+				gtk_grid_attach (GTK_GRID (table), label, 1,7,1,1); 
 				gtk_widget_show (label);
 
 				for(i=0; i<16; i++)
@@ -914,7 +819,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				stn[16] = '\0';
 
 				label = gtk_label_new (stn);
-				gtk_grid_attach (GTK_GRID (table), label, 1,8,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 8, 9);
+				gtk_grid_attach (GTK_GRID (table), label, 1,8,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[38];
@@ -924,7 +829,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 1,12,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 12, 13);
+				gtk_grid_attach (GTK_GRID (table), label, 1,12,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[40];
@@ -934,7 +839,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 1,9,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 9, 10);
+				gtk_grid_attach (GTK_GRID (table), label, 1,9,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[42];
@@ -944,7 +849,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 1,10,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 10, 11);
+				gtk_grid_attach (GTK_GRID (table), label, 1,10,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[44];
@@ -954,7 +859,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 0,11,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 11, 12);
+				gtk_grid_attach (GTK_GRID (table), label, 0,11,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[framesize-6];
@@ -964,7 +869,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 0,13,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 13, 14);
+				gtk_grid_attach (GTK_GRID (table), label, 0,13,1,1); 
 				gtk_widget_show (label);
 
 				tempC[0] = line[framesize-4];
@@ -974,7 +879,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 				memset(buff, '\0', 15);
 				sprintf(buff, "%d", tempi);
 				label = gtk_label_new (buff);
-				gtk_grid_attach (GTK_GRID (table), label, 0,14,1,1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 1, 2, 14, 15);
+				gtk_grid_attach (GTK_GRID (table), label, 0,14,1,1); 
 				gtk_widget_show (label);
 			}
 		}
@@ -986,10 +891,8 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 		g_signal_connect (setup_display_window, "destroy", G_CALLBACK (gtk_widget_destroy), setup_display_window);
 
 		/* This makes it so the ok_button is the default. */
-		// gtk_widget_set_can_default (cancel_button, TRUE);
-		// gtk_widget_set_can_default (apply_button, TRUE);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), apply_button, TRUE, TRUE, 0);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (setup_display_window)->action_area), cancel_button, TRUE, TRUE, 0);
+		gtk_widget_set_can_default (cancel_button, TRUE);
+		gtk_widget_set_can_default (apply_button, TRUE);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (cancel_button);

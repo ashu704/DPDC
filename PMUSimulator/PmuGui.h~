@@ -1,4 +1,4 @@
- ----------------------------------------------------------------------------- 
+/* ----------------------------------------------------------------------------- 
  * PmuGui.h
  * ----------------------------------------------------------------------------- */
 
@@ -100,6 +100,8 @@ void about_pmu (GtkButton *widget, gpointer udata);
 void Pmu_Help (GtkButton *but, gpointer udata);
 
 void validation_result (char *msg);
+
+void pmu_colors();
 
 void pmu_server ();
 

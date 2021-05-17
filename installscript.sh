@@ -15,7 +15,7 @@ mysql -uroot -p <"Db.sql"
 make
 make install
 
-cd ../iPDC
+cd ../DPDC
 sudo make install
 
 cd ../PMUSimulator

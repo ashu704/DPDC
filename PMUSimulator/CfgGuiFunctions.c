@@ -1,29 +1,5 @@
 /* ----------------------------------------------------------------------------- 
  * CfgGuiFunctions.c
- * 
- * PMU Simulator - Phasor Measurement Unit Simulator
- *
- * Copyright (C) 2011-2012 Nitesh Pandit
- * Copyright (C) 2011-2012 Kedar V. Khandeparkar
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- *
- * Authors: 
- *		Nitesh Pandit <panditnitesh@gmail.com>
- *		Kedar V. Khandeparkar <kedar.khandeparkar@gmail.com>			
- *
  * ----------------------------------------------------------------------------- */
 
 
@@ -1024,170 +1000,156 @@ void cfg_create_function (GtkWidget *widget, gpointer udata)
 	gtk_container_set_border_width (GTK_CONTAINER (cfg_setup_window), 10);
 	//gtk_widget_set_size_request (cfg_setup_window, 350, 600);
 
-	/* Create a table of 11 by 2 squares. */
-	table = gtk_grid_new (); // gtk_table_new (12, 2, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 10 on x and 25 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 10); // gtk_table_set_row_spacings (GTK_TABLE  (table), 10);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 25); // gtk_table_set_col_spacings (GTK_TABLE  (table), 25);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 10); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 25); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(cfg_setup_window)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(cfg_setup_window))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	/* Add few buttons to the bottom of the dialog */
-	valdbutton = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	help_button = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Help", GTK_RESPONSE_HELP); // gtk_button_new_with_label ("Help");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	valdbutton = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Next", GTK_RESPONSE_OK); 
+	help_button = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Help", GTK_RESPONSE_HELP); 
+	cancel_button = gtk_dialog_add_button((GtkDialog *)cfg_setup_window, "Cancel", GTK_RESPONSE_CANCEL);
 
 	/* This simply creates a grid of toggle buttons on the table */
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Setup PMU Configuration</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 0, 2, 1); // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 0, 2, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	label = gtk_label_new ("PMU ID");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 1, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Station Name");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 2, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Frequency Format");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 3, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 3, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Analog Format");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 4, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 4, 5);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 4, 1, 1); 
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Phasor Format");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 5, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 5, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Phasor Notation");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 6, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 6, 7);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 6, 1, 1); 
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Number of Phasors");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0 , 7, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 7, 8);
+	gtk_grid_attach (GTK_GRID (table), label, 0 , 7, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Number of Analog");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 8, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 8, 9);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 8, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Digital Status Word");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 9, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 9, 10);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 9, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Frequency");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 10, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 10, 11);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 10, 1, 1);  
 	gtk_widget_show (label);
 
-	label = gtk_label_new ("Data Rate");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+	label = gtk_label_new ("Data Rate");     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 11, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 11, 12);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 11, 1, 1); 
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	p_id = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_id, 5);
-	gtk_grid_attach (GTK_GRID (table), p_id, 1 , 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_id, 1, 2, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), p_id, 1 , 1, 1, 1);  
 	gtk_widget_show (p_id);
 
 	p_stn = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_stn, 16);
-	gtk_grid_attach (GTK_GRID (table), p_stn, 1 , 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_stn, 1, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), p_stn, 1 , 2, 1, 1);  
 	gtk_widget_show (p_stn);
 
 	p_ff = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_ff), "Fix Point");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_ff), "Floating Point");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_ff), 0);
-	gtk_grid_attach (GTK_GRID (table), p_ff, 1, 3, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_ff, 1, 2, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), p_ff, 1, 3, 1, 1);  
 	gtk_widget_show (p_ff);
 
 	p_af = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_af), "Fix Point");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_af), "Floating Point");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_af), 0);
-	gtk_grid_attach (GTK_GRID (table), p_af, 1, 4, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_af, 1, 2, 4, 5);
+	gtk_grid_attach (GTK_GRID (table), p_af, 1, 4, 1, 1); 
 	gtk_widget_show (p_af);
 
 	p_pf = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_pf), "Fix Point");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_pf), "Floating Point");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_pf), 0);
-	gtk_grid_attach (GTK_GRID (table), p_pf, 1, 5, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_pf, 1, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), p_pf, 1, 5, 1, 1);  
 	gtk_widget_show (p_pf);
 
 	p_pn = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_pn), "Rectangular");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_pn), "Polar");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_pn), 0);
-	gtk_grid_attach (GTK_GRID (table), p_pn, 1, 6, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_pn, 1, 2, 6, 7);
+	gtk_grid_attach (GTK_GRID (table), p_pn, 1, 6, 1, 1);  
 	gtk_widget_show (p_pn);
 
 	p_phNumber = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_phNumber, 2);
-	gtk_grid_attach (GTK_GRID (table), p_phNumber, 1, 7, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_phNumber, 1, 2, 7, 8);
+	gtk_grid_attach (GTK_GRID (table), p_phNumber, 1, 7, 1, 1);  
 	gtk_widget_show (p_phNumber);
 
 	p_anNumber = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_anNumber, 2);
-	gtk_grid_attach (GTK_GRID (table), p_anNumber, 1, 8, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_anNumber, 1, 2, 8, 9);
+	gtk_grid_attach (GTK_GRID (table), p_anNumber, 1, 8, 1, 1);  
 	gtk_widget_show (p_anNumber);
 
 	p_dgNumber = gtk_entry_new();
 	gtk_entry_set_max_length ((GtkEntry *)p_dgNumber, 1);
-	gtk_grid_attach (GTK_GRID (table), p_dgNumber, 1, 9, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_dgNumber, 1, 2, 9, 10);
+	gtk_grid_attach (GTK_GRID (table), p_dgNumber, 1, 9, 1, 1);  
 	gtk_widget_show (p_dgNumber);
 
 	p_frequency = gtk_combo_box_text_new();
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_frequency), "50");
 	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_frequency), "60");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_frequency), 0);
-	gtk_grid_attach (GTK_GRID (table), p_frequency, 1, 10, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_frequency, 1, 2, 10, 11);
+	gtk_grid_attach (GTK_GRID (table), p_frequency, 1, 10, 1, 1);  
 	gtk_widget_show (p_frequency);
 
 	p_drate = gtk_combo_box_text_new();
@@ -1197,7 +1159,7 @@ void cfg_create_function (GtkWidget *widget, gpointer udata)
      gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_drate), "50");
      gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_drate), "100");
 	gtk_combo_box_set_active(GTK_COMBO_BOX(p_drate), 2);
-	gtk_grid_attach (GTK_GRID (table), p_drate, 1, 11, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_drate, 1, 2, 11, 12);
+	gtk_grid_attach (GTK_GRID (table), p_drate, 1, 11, 1, 1);
 	gtk_widget_show (p_drate);
 
 	/* Signal handling for buttons on CFG Setuo Window */
@@ -1208,12 +1170,10 @@ void cfg_create_function (GtkWidget *widget, gpointer udata)
 	g_signal_connect_swapped (cfg_setup_window, "destroy", G_CALLBACK (gtk_widget_destroy), cfg_setup_window);
 
 	/* This makes it so the button is the default. */
-	// gtk_widget_set_can_default (valdbutton, TRUE);
-	// gtk_widget_set_can_default (help_button, TRUE);
-	// gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cfg_setup_window)->action_area), valdbutton, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cfg_setup_window)->action_area), help_button, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (cfg_setup_window)->action_area), cancel_button, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (valdbutton, TRUE);
+	gtk_widget_set_can_default (help_button, TRUE);
+	gtk_widget_set_can_default (cancel_button, TRUE);
+	
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (valdbutton);
@@ -1295,7 +1255,6 @@ void channel_names_for_phasor ()
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	/* The dialog window is created with a vbox packed into it */								
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(PhasorChWin)->vbox), scrolled_window, TRUE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(PhasorChWin))), scrolled_window, TRUE, TRUE, 0);
 
 	gtk_widget_show (scrolled_window);
@@ -1306,25 +1265,25 @@ void channel_names_for_phasor ()
      	{
           	table_rows = temp_local;
      	}	 
-	table = gtk_grid_new (); // gtk_table_new (table_rows+1, 6, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	/* Pack the table into the window */
-	gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+	gtk_container_add (GTK_CONTAINER (scrolled_window), table); 
 	gtk_widget_show (table);
 
 	/* Add a "Next" button to the bottom of the dialog */
-	next_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	back_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Back", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Back");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Cancel", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Cancel");
+	next_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Next", GTK_RESPONSE_OK); 
+	back_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Back", GTK_RESPONSE_OK); 
+	cancel_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Cancel", GTK_RESPONSE_OK); 
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='10'><b>Enter Phasor Channel Name</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 6, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 6, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
@@ -1334,37 +1293,37 @@ void channel_names_for_phasor ()
 		memset(line,'\0',sizeof(line));
 		sprintf(line, "Phasor Ch %d : ", j);
 		label = gtk_label_new (line);
-		gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1); 
 		gtk_widget_show (label);
 
 		num_text[j] = gtk_entry_new ();
 		gtk_entry_set_max_length ((GtkEntry *)num_text[j], 16);
-		gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text[j], 1, 2, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  
 		gtk_widget_show (num_text[j]);
 
 		num_combo[j] = gtk_combo_box_text_new();
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Voltage");
 		gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Current");
 		gtk_combo_box_set_active(GTK_COMBO_BOX(num_combo[j]), 0);
-		gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_combo[j], 2, 3, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  
 		gtk_widget_show (num_combo[j]);
 
 		memset(line,'\0',sizeof(line));
 		sprintf(line, "Max Limit %d : ", j);
 		label = gtk_label_new (line);
-		gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  
 		gtk_widget_show (label);
 
 		num_text1[j] = gtk_entry_new ();
 		gtk_entry_set_max_length ((GtkEntry *)num_text1[j], 16);
-		gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text1[j], 4, 5, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  
 		gtk_widget_show (num_text1[j]);
 		if(cfg_info->cfg_pf == 1) gtk_widget_set_sensitive(GTK_WIDGET(num_text1[j]), FALSE);
 
 		memset(line,'\0',sizeof(line));
 		sprintf(line, "(kV or Amp)");
 		label = gtk_label_new (line);
-		gtk_grid_attach (GTK_GRID (table), label, 5, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, i, i+1);
+		gtk_grid_attach (GTK_GRID (table), label, 5, i, 1, 1);  
 		gtk_widget_show (label);
 
 		i = i+1;
@@ -1375,7 +1334,7 @@ void channel_names_for_phasor ()
           	for (jj = i; jj < table_rows; jj++)
           	{
 		     	label = gtk_label_new ("-- ");
-		     	gtk_grid_attach (GTK_GRID (table), label, 0, jj, 6, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, jj, jj+1);
+		     	gtk_grid_attach (GTK_GRID (table), label, 0, jj, 6, 1);  
 		     	gtk_widget_show (label);
           	}
      	}
@@ -1387,12 +1346,9 @@ void channel_names_for_phasor ()
 	g_signal_connect_swapped (PhasorChWin, "destroy", G_CALLBACK (gtk_widget_destroy), PhasorChWin);
 
 	/* This makes it so the button is the default. */
-	// gtk_widget_set_can_default (back_button, TRUE);
-	// gtk_widget_set_can_default (next_button, TRUE);
-	// gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (PhasorChWin)->action_area), back_button, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (PhasorChWin)->action_area), next_button, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (PhasorChWin)->action_area), cancel_button, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (back_button, TRUE);
+	gtk_widget_set_can_default (next_button, TRUE);
+	gtk_widget_set_can_default (cancel_button, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (back_button);
@@ -1443,8 +1399,7 @@ void channel_names_for_analog ()
 		/* The policy is one of GTK_POLICY AUTOMATIC, or GTK_POLICY_ALWAYS. GTK_POLICY_AUTOMATIC will automatically decide whether you need scrollbars, whereas GTK_POLICY_ALWAYS will always leave the scrollbars there. The first one is the horizontal scrollbar, the second is vertical. */
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
-		/* The dialog window is created with a vbox packed into it */								
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(AnalogChWin)->vbox), scrolled_window, TRUE, TRUE, 0);
+		/* The dialog window is created with a vbox packed into it */							
 		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(AnalogChWin))), scrolled_window, TRUE, TRUE, 0);
 		gtk_widget_show (scrolled_window);
 
@@ -1454,24 +1409,24 @@ void channel_names_for_analog ()
           	{
                		table_rows = temp_local;
           	} 
-          	table = gtk_grid_new (); // gtk_table_new (table_rows+1, 5, FALSE);
+          	table = gtk_grid_new (); 
 
-		next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-		cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+		next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); 
+		cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='10'><b>Enter Analog Channel Name</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 5, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 0, 1);
+		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 5, 1);  
 		gtk_widget_show (label);
 		g_free (markup);
 
 		/* Set the spacing to 15 on x and 25 on y */
-		gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-		gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+		gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 		/* Pack the table into the window */
-		gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+		gtk_container_add (GTK_CONTAINER (scrolled_window), table); 
 		gtk_widget_show (table);
 
 		/* Add a "Next" button to the bottom of the dialog */
@@ -1483,12 +1438,12 @@ void channel_names_for_analog ()
 			memset(line,'\0',sizeof(line));
 			sprintf(line, "Analog Ch %d : ", j);
 			label = gtk_label_new (line);
-			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  
 			gtk_widget_show (label);
 
 			num_text[j] = gtk_entry_new ();
 			gtk_entry_set_max_length ((GtkEntry *)num_text[j], 16);
-			gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text[j], 1, 2, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  
 			gtk_widget_show (num_text[j]);
 
 			num_combo[j] = gtk_combo_box_text_new();
@@ -1496,18 +1451,18 @@ void channel_names_for_analog ()
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "POW");
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Peak");
 			gtk_combo_box_set_active(GTK_COMBO_BOX(num_combo[j]), 0);
-			gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_combo[j], 2, 3, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1); 
 			gtk_widget_show (num_combo[j]);
 
 			memset(line,'\0',sizeof(line));
 			sprintf(line, "Maximum Value %d : ", j);
 			label = gtk_label_new (line);
-			gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i  , i+1);
+			gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  
 			gtk_widget_show (label);
 
 			num_text1[j] = gtk_entry_new ();
 			gtk_entry_set_max_length ((GtkEntry *)num_text1[j], 16);
-			gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text1[j], 4, 5, i  , i+1);
+			gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  
 			gtk_widget_show (num_text1[j]);
 			if(cfg_info->cfg_af == 1) gtk_widget_set_sensitive(GTK_WIDGET(num_text1[j]), FALSE);
 
@@ -1519,7 +1474,7 @@ void channel_names_for_analog ()
                		for (jj = i; jj < table_rows; jj++)
                		{
                     		label = gtk_label_new ("-- ");
-                    		gtk_grid_attach (GTK_GRID (table), label, 0, jj, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, jj, jj+1);
+                    		gtk_grid_attach (GTK_GRID (table), label, 0, jj, 1, 1); 
                     		gtk_widget_show (label);
                		}
           	}
@@ -1530,10 +1485,8 @@ void channel_names_for_analog ()
 		g_signal_connect_swapped (AnalogChWin, "destroy", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
 
 		/* This makes it so the button is the default. */
-		// gtk_widget_set_can_default (next_button, TRUE);
-		// gtk_widget_set_can_default (cancel_button, TRUE);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), next_button, TRUE, TRUE, 0);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), cancel_button, TRUE, TRUE, 0);
+		gtk_widget_set_can_default (next_button, TRUE);
+		gtk_widget_set_can_default (cancel_button, TRUE);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (next_button);
@@ -1583,29 +1536,28 @@ void channel_names_for_digital ()
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 		/* The dialog window is created with a vbox packed into it */								
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(AnalogChWin)->vbox), scrolled_window, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(AnalogChWin))), scrolled_window, TRUE, TRUE, 0);
 		gtk_widget_show (scrolled_window);
 
 		/* Create a table of ? by 2 squares. */
-		table = gtk_grid_new (); // gtk_table_new (cfg_info->cfg_dgnmr_val*16+1, 2, FALSE);
+		table = gtk_grid_new (); 
 
 		/* Set the spacing to 15 on x and 25 on y */
-		gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-		gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+		gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 		/* Pack the table into the window */
-		gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+		gtk_container_add (GTK_CONTAINER (scrolled_window), table); 
 		gtk_widget_show (table);
 
 		/* Add a "Next" button to the bottom of the dialog */
-	    next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	    cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	    next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); 
+	    cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='10'><b>Enter Digital Channels Name</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1); 
 		gtk_widget_show (label);
 		g_free (markup);
 
@@ -1615,29 +1567,26 @@ void channel_names_for_digital ()
 			memset(line,'\0',sizeof(line));
 			sprintf(line, "Digital Ch %d : ", i);
 			label = gtk_label_new (line);
-			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  
 			gtk_widget_show (label);
 		}
 
 		for(i=1; i<cfg_info->cfg_dgnmr_val*16+1; i++)
 		{
 			num_text[i] = gtk_entry_new ();
-			//gtk_entry_set_max_length (GtkEntry *entry, gint max);
 			gtk_entry_set_max_length ((GtkEntry *)num_text[i], 16);
-			gtk_grid_attach (GTK_GRID (table), num_text[i], 1, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text[i], 1, 2, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), num_text[i], 1, i, 1, 1);  
 			gtk_widget_show (num_text[i]);
 		}
 
 		/* Signal handling for Next button on Window */
 		g_signal_connect_swapped (next_button, "clicked", G_CALLBACK (validation_digital_names), NULL);
 		g_signal_connect_swapped (cancel_button, "clicked", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
-		// g_signal_connect_swapped (AnalogChWin, "response", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
+		g_signal_connect_swapped (AnalogChWin, "destroy", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
 
 		/* This makes it so the button is the default. */
 		gtk_widget_set_can_default (next_button, TRUE);
-		gtk_widget_set_can_default (cancel_button, TRUE);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), next_button, TRUE, TRUE, 0);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), cancel_button, TRUE, TRUE, 0);	    
+		gtk_widget_set_can_default (cancel_button, TRUE);    
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (next_button);
@@ -1719,57 +1668,56 @@ void stat_chng_options(GtkWidget *widget, gpointer udata)
 	gtk_container_set_border_width (GTK_CONTAINER (CCOptionWin), 10);
 
 	/* Create a table of 7 by 3 squares */
-	table = gtk_grid_new (); // gtk_table_new (10, 3, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Deactivate Pmu Simulator Window */
 	gtk_window_set_modal (GTK_WINDOW (CCOptionWin), TRUE);
         gtk_window_set_keep_above(GTK_WINDOW (CCOptionWin), TRUE);
 
 	/* Set the spacing to 15 on x and 60 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 	
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCOptionWin)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCOptionWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Modification of bits in STAT Word</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
 	ID_butn = gtk_button_new_with_label ("Set Invalid Data bit (Bit-15)");
-	gtk_grid_attach (GTK_GRID (table), ID_butn, 1, 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), ID_butn, 1, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), ID_butn, 1, 2, 1, 1);  
 	gtk_widget_show (ID_butn);
 
 	PE_butn = gtk_button_new_with_label ("Set PMU Error bit (Bit-14)");
-	gtk_grid_attach (GTK_GRID (table), PE_butn, 1, 3, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), PE_butn, 1, 2, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), PE_butn, 1, 3, 1, 1);  
 	gtk_widget_show (PE_butn);
 
 	DS_butn = gtk_button_new_with_label ("Set Data Sorting bit (Bit-12)");
-	gtk_grid_attach (GTK_GRID (table), DS_butn, 1, 4, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), DS_butn, 1, 2, 4, 5);
+	gtk_grid_attach (GTK_GRID (table), DS_butn, 1, 4, 1, 1);  
 	gtk_widget_show (DS_butn);
 
 	PT_butn = gtk_button_new_with_label ("Set PMU Trigger bit (Bit-11)");
-	gtk_grid_attach (GTK_GRID (table), PT_butn, 1, 5, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), PT_butn, 1, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), PT_butn, 1, 5, 1, 1);  
 	gtk_widget_show (PT_butn);
 
 	chk_butn = gtk_button_new_with_label ("CheckSum Error in Data Frame");
-	gtk_grid_attach (GTK_GRID (table), chk_butn, 1, 6, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), chk_butn, 1, 2, 6, 7);
+	gtk_grid_attach (GTK_GRID (table), chk_butn, 1, 6, 1, 1);  
 	gtk_widget_show (chk_butn);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : The Synchronization Error (Bit-13) handled internaly.\nCheckSum Error will not change any bit in STAT Word.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 9, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label,  0, 2, 9, 10);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 9, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add a "close" button to the bottom of the dialog */
-	close_butn = gtk_dialog_add_button((GtkDialog *)CCOptionWin, "Close", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("close");
+	close_butn = gtk_dialog_add_button((GtkDialog *)CCOptionWin, "Close", GTK_RESPONSE_CANCEL); 
 
 	/* Signal handling for all buttons on Window */
 	g_signal_connect (ID_butn, "clicked", G_CALLBACK (cfg_STAT_change), (gpointer) "a");
@@ -1778,11 +1726,10 @@ void stat_chng_options(GtkWidget *widget, gpointer udata)
 	g_signal_connect (PT_butn, "clicked", G_CALLBACK (cfg_STAT_change), (gpointer) "d");
 	g_signal_connect (chk_butn, "clicked", G_CALLBACK (cfg_STAT_change), (gpointer) "e");
 	g_signal_connect_swapped (close_butn, "clicked", G_CALLBACK (gtk_widget_destroy), CCOptionWin);
-	// g_signal_connect_swapped (CCOptionWin, "response", G_CALLBACK (gtk_widget_destroy), CCOptionWin);
+	g_signal_connect_swapped (CCOptionWin, "destroy", G_CALLBACK (gtk_widget_destroy), CCOptionWin);
 
 	/* This makes it so the button is the default */
-	// gtk_widget_set_can_default (close_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCOptionWin)->action_area), close_butn, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (close_butn, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (close_butn);
@@ -1866,7 +1813,7 @@ void Change_pmu_configuration(GtkWidget *widget, gpointer udata)
 	gtk_container_set_border_width (GTK_CONTAINER (CCWin), 10);
 
 	/* Create a table of 4 by 2 squares */
-	table = gtk_grid_new (); // gtk_table_new (6, 2, FALSE);
+	table = gtk_grid_new (); 
 	
 	/* Deactivate Pmu Simulator Window */
 	gtk_window_set_modal (GTK_WINDOW (CCWin), TRUE);
@@ -1874,52 +1821,50 @@ void Change_pmu_configuration(GtkWidget *widget, gpointer udata)
 
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCWin)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Channel Operation</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add few radio buttons on the dialog window */
 	Addbutton = gtk_radio_button_new_with_label (NULL, "Add New Channels");
-	gtk_grid_attach (GTK_GRID (table), Addbutton, 0, 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), Addbutton, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), Addbutton, 0, 2, 1, 1);  
      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (Addbutton), TRUE);
      gtk_widget_show (Addbutton);
 
 	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (Addbutton));
 	Removebutton = gtk_radio_button_new_with_label (NULL, "Remove Channels");
-	gtk_grid_attach (GTK_GRID (table), Removebutton, 0, 3, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), Removebutton, 0, 1, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), Removebutton, 0, 3, 1, 1);  
 	gtk_widget_show (Removebutton);
 
 //Note : Both Phasor & Analog channels could be added.\nYou will get the data rate change option at the end
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Both Phasor and Analog channels could be add.\nYou will get the change Data Rate option at the end.\nIt will change the bit-10 from 0 to 1 in STAT Word in data frames.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add 'Close' buttons on the dialog window */
-	close_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Close", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Close");
+	close_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Close", GTK_RESPONSE_CANCEL); 
 
 	/* Signal handling for buttons on Option Window */
 	g_signal_connect_swapped (Addbutton, "clicked", G_CALLBACK (new_phasor_num), NULL);
 	g_signal_connect_swapped (Removebutton, "clicked", G_CALLBACK (remove_phasor_num), NULL);
 	g_signal_connect_swapped (close_butn, "clicked", G_CALLBACK (gtk_widget_destroy), CCWin);
-	// g_signal_connect_swapped (CCWin, "response", G_CALLBACK (gtk_widget_destroy), CCWin);
+	g_signal_connect_swapped (CCWin, "destory", G_CALLBACK (gtk_widget_destroy), CCWin);
 
 	/* This makes it so the button is the default. */
-	// gtk_widget_set_can_default (close_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), close_butn, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (close_butn, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (close_butn);
@@ -1953,52 +1898,51 @@ void new_phasor_num(GtkWidget *widget, gpointer udata)
 	//gtk_widget_set_size_request (CCWin, 350, 300);
 
 	/* Create a table of 3 by 3 squares. */
-	table = gtk_grid_new (); // gtk_table_new (3, 3, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 25 on x and 40 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
-	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCWin)->vbox), table, TRUE, TRUE, 0);	
+	/* Pack the table into the window */	
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	/* Add few buttons to the bottom of the dialog */
-	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	help_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Help", GTK_RESPONSE_HELP); // gtk_button_new_with_label ("Help");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); 
+	help_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Help", GTK_RESPONSE_HELP);
+	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 	label = gtk_label_new ("New Phasors");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1); 
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("New Analogs");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);  
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	phtext = gtk_entry_new ();
-	gtk_grid_attach (GTK_GRID (table), phtext, 1, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), phtext, 1, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), phtext, 1, 0, 1, 1); 
 	gtk_widget_show (phtext);
 
 	angtext = gtk_entry_new ();
-	gtk_grid_attach (GTK_GRID (table), angtext, 1, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), angtext, 1, 2, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), angtext, 1, 1, 1, 1); 
 	gtk_widget_show (angtext);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : New channels will be added to existing configuration frame.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 2, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
@@ -2009,12 +1953,9 @@ void new_phasor_num(GtkWidget *widget, gpointer udata)
 	g_signal_connect_swapped (CCWin, "destroy", G_CALLBACK (gtk_widget_destroy), CCWin);
 
 	/* This makes it so the button is the defaulaction_areat */
-	// gtk_widget_set_can_default (next_butn, TRUE);
-	// gtk_widget_set_can_default (help_button, TRUE);
-	// gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), next_butn, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), help_button, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), cancel_button, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (next_butn, TRUE);
+	gtk_widget_set_can_default (help_button, TRUE);
+	gtk_widget_set_can_default (cancel_button, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (next_butn);
@@ -2062,7 +2003,6 @@ void new_channel_names_for_phasor ()
 	     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 	     /* The dialog window is created with a vbox packed into it */								
-	     // gtk_box_pack_start (GTK_BOX (GTK_DIALOG(PhasorChWin)->vbox), scrolled_window, TRUE, FALSE, 0);
 		 gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(PhasorChWin))), scrolled_window, TRUE, TRUE, 0);
 	     gtk_widget_show (scrolled_window);
 
@@ -2072,24 +2012,24 @@ void new_channel_names_for_phasor ()
              {
                	table_rows = temp_local;
              } 
-	     table = gtk_grid_new (); // gtk_table_new (table_rows+1, 6, FALSE);
+	     table = gtk_grid_new (); 
 
 	     /* Set the spacing to 15 on x and 25 on y */
-	     gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	     gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	     gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	     gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	     /* Pack the table into the window */
-	     gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+	     gtk_container_add (GTK_CONTAINER (scrolled_window), table); 
 	     gtk_widget_show (table);
 
 	     /* Add a "Next" button to the bottom of the dialog */
-	     next_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	     cancel_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	     next_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Next", GTK_RESPONSE_OK); 
+	     cancel_button = gtk_dialog_add_button((GtkDialog *)PhasorChWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 	     label = gtk_label_new (" ");
 	     markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='10'><b>Enter Phasor Channel Name</b></span>");
 	     gtk_label_set_markup (GTK_LABEL (label), markup);
-	     gtk_grid_attach (GTK_GRID (table), label, 0, 0, 6, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, 0, 1);
+	     gtk_grid_attach (GTK_GRID (table), label, 0, 0, 6, 1);  
 	     gtk_widget_show (label);
 	     g_free (markup);
 
@@ -2099,37 +2039,37 @@ void new_channel_names_for_phasor ()
 		     memset(line,'\0',sizeof(line));
 		     sprintf(line, "Phasor Ch %d : ", j);
 		     label = gtk_label_new (line);
-		     gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1); 
 		     gtk_widget_show (label);
 
 		     num_text[j] = gtk_entry_new ();
 		     gtk_entry_set_max_length ((GtkEntry *)num_text[j], 16);
-		     gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text[j], 1, 2, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  
 		     gtk_widget_show (num_text[j]);
 
 		     num_combo[j] = gtk_combo_box_text_new();
 		     gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Voltage");
 		     gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Current");
 		     gtk_combo_box_set_active(GTK_COMBO_BOX(num_combo[j]), 0);
-		     gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_combo[j], 2, 3, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  
 		     gtk_widget_show (num_combo[j]);
 
 		     memset(line,'\0',sizeof(line));
 		     sprintf(line, "Max Limit %d : ", j);
 		     label = gtk_label_new (line);
-		     gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1); 
 		     gtk_widget_show (label);
 
 		     num_text1[j] = gtk_entry_new ();
 		     gtk_entry_set_max_length ((GtkEntry *)num_text1[j], 16);
-		     gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text1[j], 4, 5, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  
 		     gtk_widget_show (num_text1[j]);
 		     if(cfg_info->cfg_pf == 1) gtk_widget_set_sensitive(GTK_WIDGET(num_text1[j]), FALSE);
 
 		     memset(line,'\0',sizeof(line));
 		     sprintf(line, "(kV or Amp)");
 		     label = gtk_label_new (line);
-		     gtk_grid_attach (GTK_GRID (table), label, 5, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 5, 6, i, i+1);
+		     gtk_grid_attach (GTK_GRID (table), label, 5, i, 1, 1); 
 		     gtk_widget_show (label);
 
 		     i = i+1;
@@ -2140,7 +2080,7 @@ void new_channel_names_for_phasor ()
                for (jj = i; jj < table_rows; jj++)
                {
                     label = gtk_label_new ("-- ");
-                    gtk_grid_attach (GTK_GRID (table), label, 0, jj, 6, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 6, jj, jj+1);
+                    gtk_grid_attach (GTK_GRID (table), label, 0, jj, 6, 1);  
                     gtk_widget_show (label);
                }
           }
@@ -2148,13 +2088,11 @@ void new_channel_names_for_phasor ()
 		/* Signal handling for Next button on Window */
 		g_signal_connect_swapped (next_button, "clicked", G_CALLBACK (validate_func), NULL);
 		g_signal_connect_swapped (cancel_button, "clicked", G_CALLBACK (gtk_widget_destroy), PhasorChWin);
-		// g_signal_connect_swapped (PhasorChWin, "response", G_CALLBACK (gtk_widget_destroy), PhasorChWin);
+		g_signal_connect_swapped (PhasorChWin, "destroy", G_CALLBACK (gtk_widget_destroy), PhasorChWin);
 
 		/* This makes it so the button is the default */
-		// gtk_widget_set_can_default (next_button, TRUE);
-		// gtk_widget_set_can_default (cancel_button, TRUE);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (PhasorChWin)->action_area), next_button, TRUE, TRUE, 0);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (PhasorChWin)->action_area), cancel_button, TRUE, TRUE, 0);
+		gtk_widget_set_can_default (next_button, TRUE);
+		gtk_widget_set_can_default (cancel_button, TRUE);
 
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (next_button);
@@ -2207,7 +2145,6 @@ void new_channel_names_for_analog ()
 		gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
 
 		/* The dialog window is created with a vbox packed into it */								
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(AnalogChWin)->vbox), scrolled_window, TRUE, TRUE, 0);
 		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(AnalogChWin))), scrolled_window, TRUE, TRUE, 0);
 		gtk_widget_show (scrolled_window);
 
@@ -2217,24 +2154,24 @@ void new_channel_names_for_analog ()
           	{
                		table_rows = temp_local;
           	} 
-          	table = gtk_grid_new (); // gtk_table_new (table_rows+1, 5, FALSE);
+          	table = gtk_grid_new (); 
 
-		next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-		cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+		next_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Next", GTK_RESPONSE_OK); 
+		cancel_button = gtk_dialog_add_button((GtkDialog *)AnalogChWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 		label = gtk_label_new (" ");
 		markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='10'><b>Enter Analog Channel Name</b></span>");
 		gtk_label_set_markup (GTK_LABEL (label), markup);
-		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 5, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, 0, 1);
+		gtk_grid_attach (GTK_GRID (table), label, 0, 0, 5, 1); 
 		gtk_widget_show (label);
 		g_free (markup);
 
 		/* Set the spacing to 15 on x and 25 on y */
-		gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-		gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+		gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+		gtk_grid_set_column_spacing (GTK_GRID(table), 2);
 
 		/* Pack the table into the window */
-		gtk_container_add (GTK_CONTAINER (scrolled_window), table); // gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled_window), table);
+		gtk_container_add (GTK_CONTAINER (scrolled_window), table); 
 		gtk_widget_show (table);
 
 		/* Add a "Next" button to the bottom of the dialog */
@@ -2246,12 +2183,12 @@ void new_channel_names_for_analog ()
 			memset(line,'\0',sizeof(line));
 			sprintf(line, "Analog Ch %d : ", j);
 			label = gtk_label_new (line);
-			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), label, 0, i, 1, 1);  
 			gtk_widget_show (label);
 
 			num_text[j] = gtk_entry_new ();
 			gtk_entry_set_max_length ((GtkEntry *)num_text[j], 16);
-			gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text[j], 1, 2, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), num_text[j], 1, i, 1, 1); 
 			gtk_widget_show (num_text[j]);
 
 			num_combo[j] = gtk_combo_box_text_new();
@@ -2259,18 +2196,18 @@ void new_channel_names_for_analog ()
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "POW");
 			gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(num_combo[j]), "Peak");
 			gtk_combo_box_set_active(GTK_COMBO_BOX(num_combo[j]), 0);
-			gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_combo[j], 2, 3, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), num_combo[j], 2, i, 1, 1); 
 			gtk_widget_show (num_combo[j]);
 
 			memset(line,'\0',sizeof(line));
 			sprintf(line, "Maximum Value %d : ", j);
 			label = gtk_label_new (line);
-			gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 3, 4, i, i+1);
+			gtk_grid_attach (GTK_GRID (table), label, 3, i, 1, 1); 
 			gtk_widget_show (label);
 
 			num_text1[j] = gtk_entry_new ();
 			gtk_entry_set_max_length ((GtkEntry *)num_text1[j], 16);
-			gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), num_text1[j], 4, 5, i  , i+1);
+			gtk_grid_attach (GTK_GRID (table), num_text1[j], 4, i, 1, 1);  
 			gtk_widget_show (num_text1[j]);
 			if(cfg_info->cfg_af == 1) gtk_widget_set_sensitive(GTK_WIDGET(num_text1[j]), FALSE);
 
@@ -2282,7 +2219,7 @@ void new_channel_names_for_analog ()
                		for (jj = i; jj < table_rows; jj++)
                		{
                     		label = gtk_label_new ("-- ");
-                    		gtk_grid_attach (GTK_GRID (table), label, 0, jj, 5, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 5, jj, jj+1);
+                    		gtk_grid_attach (GTK_GRID (table), label, 0, jj, 5, 1); 
                     		gtk_widget_show (label);
                		}
           	}
@@ -2290,14 +2227,11 @@ void new_channel_names_for_analog ()
 		/* Signal handling for Next button on Window */
 		g_signal_connect_swapped (next_button, "clicked", G_CALLBACK (validation_new_analog_names), NULL);
 		g_signal_connect_swapped (cancel_button, "clicked", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
-		// g_signal_connect_swapped (AnalogChWin, "response", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
+		g_signal_connect_swapped (AnalogChWin, "destroy", G_CALLBACK (gtk_widget_destroy), AnalogChWin);
 
 		/* This makes it so the button is the default */
-		// gtk_widget_set_can_default (next_button, TRUE);
-		// gtk_widget_set_can_default (cancel_button, TRUE);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), next_button, TRUE, TRUE, 0);
-		// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (AnalogChWin)->action_area), cancel_button, TRUE, TRUE, 0);
-
+		gtk_widget_set_can_default (next_button, TRUE);
+		gtk_widget_set_can_default (cancel_button, TRUE);
 		/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 		gtk_widget_grab_default (next_button);
 		gtk_widget_show (next_button);
@@ -2338,57 +2272,55 @@ void change_data_rate_option()
 	//gtk_widget_set_size_request (CCWin, 350, 350);
 
 	/* Create a table of 4 by 2 squares */
-	table = gtk_grid_new (); // gtk_table_new (6, 2, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 15 on x and 25 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table), 8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table), 2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCWin)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	label = gtk_label_new ("Do you want to change data rate?");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  
 	gtk_widget_show (label);
 
 	/* Add few radio buttons on the dialog window */
 	Addbutton = gtk_radio_button_new_with_label (NULL, "YES");
-	gtk_grid_attach (GTK_GRID (table), Addbutton, 0, 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), Addbutton, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), Addbutton, 0, 2, 1, 1); 
      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (Addbutton), TRUE);
      gtk_widget_show (Addbutton);
 
 	group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (Addbutton));
 	Removebutton = gtk_radio_button_new_with_label (NULL, "NO");
-	gtk_grid_attach (GTK_GRID (table), Removebutton, 0, 3, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), Removebutton, 0, 1, 3, 4);
+	gtk_grid_attach (GTK_GRID (table), Removebutton, 0, 3, 1, 1);  
 	gtk_widget_show (Removebutton);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Changed data rate will be mentioned in the new CFG\nand will be transmitted to communicating PDCs.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-     	// gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     	
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 5, 6);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 5, 2, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add a "close" button to the bottom of the dialog */
-	close_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Close", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Close");
+	close_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Close", GTK_RESPONSE_CANCEL); 
 
 	/* Signal handling for buttons on Data rate Window */
 	g_signal_connect_swapped (Addbutton, "clicked", G_CALLBACK (enter_new_data_rate), NULL);
 	g_signal_connect_swapped (Removebutton, "clicked", G_CALLBACK (final_cfg_update_call), NULL);
 	g_signal_connect_swapped (close_butn, "clicked", G_CALLBACK (gtk_widget_destroy), CCWin);
-	// g_signal_connect_swapped (CCWin, "response", G_CALLBACK (gtk_widget_destroy), CCWin);
+	g_signal_connect_swapped (CCWin, "destory", G_CALLBACK (gtk_widget_destroy), CCWin);
 
 	/* This makes it so the button is the default */
-	// gtk_widget_set_can_default (close_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), close_butn, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (close_butn, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (close_butn);
@@ -2419,26 +2351,25 @@ void enter_new_data_rate(GtkWidget *widget, gpointer udata)
 	//gtk_widget_set_size_request (CCWin, 350, 300);
 
 	/* Create a table of 3 by 3 squares */
-	table = gtk_grid_new (); // gtk_table_new (5, 2, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 25 on x and 40 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 10); // gtk_table_set_row_spacings (GTK_TABLE  (table), 10);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 5); // gtk_table_set_col_spacings (GTK_TABLE  (table), 5);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 10); 
+	gtk_grid_set_column_spacing (GTK_GRID(table), 5); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCWin)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	/* Add a "next" button to the bottom of the dialog */
-	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); 
+	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 	label = gtk_label_new ("Select New Data Rate");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);  
 	gtk_widget_show (label);
 
 
@@ -2466,13 +2397,13 @@ void enter_new_data_rate(GtkWidget *widget, gpointer udata)
 	    	gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(p_drate), "120");
      	gtk_combo_box_set_active(GTK_COMBO_BOX(p_drate), 4);
      }
-	gtk_grid_attach (GTK_GRID (table), p_drate, 1, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), p_drate, 1, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), p_drate, 1, 0, 1, 1); 
 	gtk_widget_show (p_drate);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Frames would be send as per the new data rate.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 4, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 4, 5);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 4, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
@@ -2482,10 +2413,8 @@ void enter_new_data_rate(GtkWidget *widget, gpointer udata)
 	g_signal_connect_swapped (CCWin, "destroy", G_CALLBACK (gtk_widget_destroy), CCWin);
 
 	/* This makes it so the button is the default */
-	// gtk_widget_set_can_default (next_butn, TRUE);
-	// gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), next_butn, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), cancel_button, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (next_butn, TRUE);
+	gtk_widget_set_can_default (cancel_button, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (next_butn);
@@ -2523,43 +2452,42 @@ void remove_phasor_num (GtkWidget *widget, gpointer udata)
 	//gtk_widget_set_size_request (CCWin, 350, 300);
 
 	/* Create a table of 5 by 3 squares */
-	table = gtk_grid_new (); // gtk_table_new (3, 3, FALSE);
+	table = gtk_grid_new (); 
 
 	/* Set the spacing to 5 on x and 40 on y */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 8); // gtk_table_set_row_spacings (GTK_TABLE  (table),8);
-	gtk_grid_set_column_spacing (GTK_GRID(table), 2); // gtk_table_set_col_spacings (GTK_TABLE  (table),2);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 8);
+	gtk_grid_set_column_spacing (GTK_GRID(table), 2); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(CCWin)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(CCWin))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	/* Add a "next" button to the bottom of the dialog */
-	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Next");
-	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Cancel");
+	next_butn = gtk_dialog_add_button((GtkDialog *)CCWin, "Next", GTK_RESPONSE_OK); 
+	cancel_button = gtk_dialog_add_button((GtkDialog *)CCWin, "Cancel", GTK_RESPONSE_CANCEL); 
 
 	/* Create text boxes for user to enter appropriate values */
 	label = gtk_label_new ("Phasors to be remove");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new ("Analogs to be remove");
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 1, 1, 1);  
 	gtk_widget_show (label);
 
 	/* Create text boxes for user to enter appropriate values */
 	phtext = gtk_entry_new ();
-	gtk_grid_attach (GTK_GRID (table), phtext, 1, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), phtext, 1, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), phtext, 1, 0, 1, 1);  
 	gtk_widget_show (phtext);
 
 	angtext = gtk_entry_new ();
-	gtk_grid_attach (GTK_GRID (table), angtext, 1, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), angtext, 1, 2, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), angtext, 1, 1, 1, 1);  
 	gtk_widget_show (angtext);
 
 	memset(line, '\0', 50);
@@ -2568,10 +2496,10 @@ void remove_phasor_num (GtkWidget *widget, gpointer udata)
 	sprintf(buff,"%d",cfg_info->cfg_phnmr_val);
 	strcat(line, buff);    		
 	label = gtk_label_new (line);
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 2, 0, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 2, 0, 1, 1);  
 	gtk_widget_show (label);
 
 	memset(line, '\0', 50);
@@ -2580,32 +2508,30 @@ void remove_phasor_num (GtkWidget *widget, gpointer udata)
 	sprintf(buff,"%d",cfg_info->cfg_annmr_val);
 	strcat(line, buff);    		
 	label = gtk_label_new (line);
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 2, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 2, 3, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), label, 2, 1, 1, 1);  
 	gtk_widget_show (label);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : New channels will be added to existing configuration frame.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-     // gtk_misc_set_alignment (GTK_MISC(label),0,0);
+     
      	gtk_label_set_xalign (GTK_LABEL (label),0);
     	gtk_label_set_yalign (GTK_LABEL (label),0);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Signal handling for buttons on Window */
 	g_signal_connect (next_butn, "clicked", G_CALLBACK (validation_remove_ph_an_num), NULL);
 	g_signal_connect_swapped (cancel_button, "clicked", G_CALLBACK (gtk_widget_destroy), CCWin);
-	// g_signal_connect_swapped (CCWin, "response", G_CALLBACK (gtk_widget_destroy), CCWin);
+	g_signal_connect_swapped (CCWin, "destory", G_CALLBACK (gtk_widget_destroy), CCWin);
 
 	/* This makes it so the button is the default */
-	// gtk_widget_set_can_default (next_butn, TRUE);
-	// gtk_widget_set_can_default (cancel_button, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), next_butn, TRUE, TRUE, 0);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (CCWin)->action_area), cancel_button, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (next_butn, TRUE);
+	gtk_widget_set_can_default (cancel_button, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (next_butn);
@@ -2655,53 +2581,50 @@ void hdr_create_function (GtkWidget *widget, gpointer udata)
 	gtk_container_set_border_width (GTK_CONTAINER (hdr_frame_window), 10);
 
 	/* Create a table of 3 by 2 squares */
-	table = gtk_grid_new (); // gtk_table_new (3, 2, FALSE);
+	table = gtk_grid_new ();
 
 	/* Deactivate Pmu Simulator Window */
 	gtk_window_set_modal (GTK_WINDOW (hdr_frame_window), TRUE);
         gtk_window_set_keep_above(GTK_WINDOW (hdr_frame_window), TRUE);
 
 	/* Set the spacing to 30 on x */
-	gtk_grid_set_row_spacing (GTK_GRID(table), 10); // gtk_table_set_row_spacings (GTK_TABLE  (table), 10);
+	gtk_grid_set_row_spacing (GTK_GRID(table), 10); 
 
 	/* Pack the table into the window */
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG(hdr_frame_window)->vbox), table, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(hdr_frame_window))), table, TRUE, TRUE, 0);
 	gtk_widget_show (table);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#990033\" font='12'><b>Enter Header Frame Details</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 2, 0, 1);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 0, 2, 1);  
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Create text boxes for user to enter appropriate values */
 	HdrFrm = gtk_entry_new();
-	gtk_grid_attach (GTK_GRID (table), HdrFrm, 0, 1, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), HdrFrm, 0, 1, 1, 2);
+	gtk_grid_attach (GTK_GRID (table), HdrFrm, 0, 1, 1, 1);  
 	gtk_widget_show (HdrFrm);
 
 	label = gtk_label_new (" ");
 	markup = g_markup_printf_escaped ("<span foreground=\"#333333\" font='8'><b>Note : Header frame includes the information about the PMU, the data sources,\nscaling, algorithms, filtering, or other related information.</b></span>");
 	gtk_label_set_markup (GTK_LABEL (label), markup);
-	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 1, 1);  // gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
+	gtk_grid_attach (GTK_GRID (table), label, 0, 2, 1, 1); 
 	gtk_widget_show (label);
 	g_free (markup);
 
 	/* Add few buttons at the bottom of the dialog */
-	vald_butn = gtk_dialog_add_button((GtkDialog *)hdr_frame_window, "Create", GTK_RESPONSE_OK); // gtk_button_new_with_label ("Create");
-	close_butn = gtk_dialog_add_button((GtkDialog *)hdr_frame_window, "Close", GTK_RESPONSE_CANCEL); // gtk_button_new_with_label ("Close");
+	vald_butn = gtk_dialog_add_button((GtkDialog *)hdr_frame_window, "Create", GTK_RESPONSE_OK); 
+	close_butn = gtk_dialog_add_button((GtkDialog *)hdr_frame_window, "Close", GTK_RESPONSE_CANCEL); 
 
 	/* Signal handling for buttons on Window */
 	g_signal_connect (vald_butn, "clicked", G_CALLBACK (validation_hdr_frm), (gpointer) "2");
 	g_signal_connect_swapped (close_butn, "clicked", G_CALLBACK (gtk_widget_destroy), hdr_frame_window);
-	// g_signal_connect_swapped (hdr_frame_window, "response", G_CALLBACK (gtk_widget_destroy), hdr_frame_window);
+	g_signal_connect_swapped (hdr_frame_window, "destory", G_CALLBACK (gtk_widget_destroy), hdr_frame_window);
 
 	/* This makes it so the button is the default */
-	// gtk_widget_set_can_default (vald_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (hdr_frame_window)->action_area), vald_butn, TRUE, TRUE, 0);
-	// gtk_widget_set_can_default (close_butn, TRUE);
-	// gtk_box_pack_start (GTK_BOX (GTK_DIALOG (hdr_frame_window)->action_area), close_butn, TRUE, TRUE, 0);
+	gtk_widget_set_can_default (vald_butn, TRUE);
+	gtk_widget_set_can_default (close_butn, TRUE);
 
 	/* This grabs this button to be the default button. Simply hitting the "Enter" key will cause this button to activate. */
 	gtk_widget_grab_default (vald_butn);
