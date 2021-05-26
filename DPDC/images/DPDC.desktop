@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
 Encoding=UTF-8
-Name=iPDC
+Name=DPDC
 Comment=A Phasor Data Concentrator
-Exec=/usr/local/bin/iPDC
-Icon=/usr/local/share/iPDC/logo.png
+Exec=/usr/local/bin/DPDC
+Icon=/usr/local/share/DPDC/images/logo.png
 Terminal=true
 Categories=Education

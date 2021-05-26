@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------------- 
  * recreate.c
  * 
- * iPDC - Phasor Data Concentrator
+ * DPDC - Phasor Data Concentrator
  *			
  *
  * ----------------------------------------------------------------------------- */
@@ -526,7 +526,7 @@ void init_cfgparser(unsigned char st[]){
 
                     		if (cfg->pmu[j]->fmt->analog == 0)
                     		{
-                        		*cfg->pmu[j]->anunit[i] = l_anunit * 1e-5; // Assumed factor of 1e5 in iPDC
+                        		*cfg->pmu[j]->anunit[i] = l_anunit * 1e-5; // Assumed factor of 1e5 in DPDC
                     		}
                     		else
                     		{

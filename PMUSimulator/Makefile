@@ -1,29 +1,6 @@
  # ----------------------------------------------------------------------------- 
  # Makefile for building PMU Simulator
-
- # iPDC - Phasor Data Concentrator
- #
- # Copyright (C) 2011 Nitesh Pandit
- # Copyright (C) 2011 Kedar V. Khandeparkar
-
- # This program is free software; you can redistribute it and/or
- # modify it under the terms of the GNU General Public License
- # as published by the Free Software Foundation; either version 2
- # of the License, or (at your option) any later version.
- #
- # This program is distributed in the hope that it will be useful,
- # but WITHOUT ANY WARRANTY; without even the implied warranty of
- # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License for more details.
- #
- # You should have received a copy of the GNU General Public License
- # along with this program; if not, write to the Free Software
- # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- #
- # Authors: 
- #		Nitesh Pandit <panditnitesh@gmail.com>
- #		Kedar V. Khandeparkar <kedar.khandeparkar@gmail.com>			
- #
+ # DPDC - Phasor Data Concentrator
  # ----------------------------------------------------------------------------- 
 
 
@@ -80,12 +57,12 @@ install: $(PROGRAM)
 	cp -f images/$(FILE5) $(CREATE_DIR)PMU/images/$(FILE5)
 	cp -f images/$(FILE6) $(DESKTOP_DIR)/$(FILE6)
 	cp $(PROGRAM) $(INSTALL_PREFIX)bin/$(PROGRAM)
-	mkdir -p $(HOME)/iPDC/DataDir
-	mkdir -p $(HOME)/iPDC/DataDir/50Hz_measurement_files
-	mkdir -p $(HOME)/iPDC/DataDir/60Hz_measurement_files
-	cp -f -r ./DataDir/50Hz_measurement_files/* $(HOME)/iPDC/DataDir/50Hz_measurement_files	#-i -n for Debian based Linux 
-	cp -f -r ./DataDir/60Hz_measurement_files/* $(HOME)/iPDC/DataDir/60Hz_measurement_files
-	chmod 777 $(HOME)/iPDC/
+	mkdir -p $(HOME)/DPDC/DataDir
+	mkdir -p $(HOME)/DPDC/DataDir/50Hz_measurement_files
+	mkdir -p $(HOME)/DPDC/DataDir/60Hz_measurement_files
+	cp -f -r ./DataDir/50Hz_measurement_files/* $(HOME)/DPDC/DataDir/50Hz_measurement_files	#-i -n for Debian based Linux 
+	cp -f -r ./DataDir/60Hz_measurement_files/* $(HOME)/DPDC/DataDir/60Hz_measurement_files
+	chmod 777 $(HOME)/DPDC/
 #	rm -f $(CLEAN_OBJECTS) $(PROGRAM)
 
 uninstall:

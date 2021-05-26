@@ -348,11 +348,11 @@ and PMU Server informations.</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="has_tooltip">True</property>
-            <property name="tooltip_text" translatable="yes">For more information visit the iPDC official web 
-'ipdc.codeplex.com/'.</property>
+            <property name="tooltip_text" translatable="yes">For more information visit the DPDC official web 
+'Dpdc.codeplex.com/'.</property>
             <property name="image">image1</property>
             <property name="relief">none</property>
-            <property name="uri">https://github.com/ashu704/iPDC</property>
+            <property name="uri">https://github.com/ashu704/DPDC</property>
           </object>
           <packing>
             <property name="x">20</property>

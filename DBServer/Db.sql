@@ -1,7 +1,7 @@
 -- =============================================================================
--- Db.sql (iPDC Data Structures for MySQL )
+-- Db.sql (DPDC Data Structures for MySQL )
 -- 
--- iPDC - Phasor Data Concentrator
+-- DPDC - Phasor Data Concentrator
 --				
 --
 -- =============================================================================
@@ -13,17 +13,17 @@
 -- The following statements are used to create a user with access to the database.
 -- Be sure to change the username and password.
 -- CREATE USER NewUser IDENTIFIED BY 'MyPassword';
--- GRANT SELECT, UPDATE, INSERT, DELETE ON iPDC.* TO NewUser;
+-- GRANT SELECT, UPDATE, INSERT, DELETE ON DPDC.* TO NewUser;
 
 SET default_storage_engine=INNODB;
-CREATE DATABASE iPDC;
-USE iPDC;
+CREATE DATABASE DPDC;
+USE DPDC;
 
 
 -- ============================================================================================
 -- This creates Main Configuration Table,
 -- This table stores MAIN CONFIGURATION details Like PDC_ID, SOC, TIME BASE, NO. OF PMU,
--- DATA Rate in iPDC Database
+-- DATA Rate in DPDC Database
 
 CREATE TABLE MAIN_CFG_TABLE(
 	PDC_ID INT NOT NULL,
@@ -189,6 +189,8 @@ CREATE TABLE RECEIVED_FRAME_TIME (
 	PRIMARY KEY(FRAME_SOC,FRAME_FRACSEC,PDC_ID,PMU_ID),
 	CONSTRAINT FOREIGN KEY (PDC_ID) REFERENCES MAIN_CFG_TABLE (PDC_ID),
 	CONSTRAINT FOREIGN KEY (PMU_ID) REFERENCES SUB_CFG_TABLE (PMU_ID)
-
 );
 -- ============================================================================================
+
+
+

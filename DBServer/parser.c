@@ -1,7 +1,7 @@
 /* ----------------------------------------------------------------------------- 
  * parser.c
  * 
- * iPDC - Phasor Data Concentrator			
+ * DPDC - Phasor Data Concentrator			
  *
  * ----------------------------------------------------------------------------- */
 
@@ -466,7 +466,7 @@ void cfgparser(unsigned char st[]){
 
 		            	if (cfg->pmu[j]->fmt->analog == 0)
 		            	{
-		                	*cfg->pmu[j]->anunit[i] = l_anunit * 1e-5; // Assumed factor of 1e5 in iPDC
+		                	*cfg->pmu[j]->anunit[i] = l_anunit * 1e-5; // Assumed factor of 1e5 in DPDC
 		            	}
 		            	else
 		            	{
@@ -1798,11 +1798,11 @@ void* dataWriteInFile(void * temp_buff) {
 		fclose(e);
 	}
 	
-    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot iPDC PHASOR_MEASUREMENTS.txt");
-    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot iPDC FREQUENCY_MEASUREMENTS.txt");
-    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot iPDC ANALOG_MEASUREMENTS.txt");
-    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot iPDC DIGITAL_MEASUREMENTS.txt");
-    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot iPDC RECEIVED_FRAME_TIME.txt");
+    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot DPDC PHASOR_MEASUREMENTS.txt");
+    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot DPDC FREQUENCY_MEASUREMENTS.txt");
+    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot DPDC ANALOG_MEASUREMENTS.txt");
+    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot DPDC DIGITAL_MEASUREMENTS.txt");
+    system("mysqlimport --local --fields-terminated-by=\, --fields-enclosed-by=\\\" -uroot -proot DPDC RECEIVED_FRAME_TIME.txt");
 
 //    	system("./upDateTable.sh");
 	printf("wrote to database\n");

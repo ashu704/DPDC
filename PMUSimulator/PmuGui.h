@@ -1,4 +1,4 @@
- ----------------------------------------------------------------------------- 
+/* ----------------------------------------------------------------------------- 
  * PmuGui.h
  * ----------------------------------------------------------------------------- */
 
@@ -67,7 +67,7 @@ int srvr_entry;
 long int ps_thrd_id;
 char *markup;
 
-/* iPDC Setup File path globaly */
+/* DPDC Setup File path globaly */
 char pmuFolderPath[200];
 char pmuFilePath[200];
 char fptr[200];

@@ -119,17 +119,17 @@ void about_pmu (GtkButton *widget, gpointer udata)
 
 	const gchar *auth[] = {"\nDr. S. Moorthi <https://www.nitt.edu/home/academics/departments/eee/people/faculty/assocprof/moorthi/>", "\nAshutosh Sharma <https://www.linkedin.com/in/ashu704/>", "\nAyush Agrawal <https://www.linkedin.com/in/ayush-agrawal-559006172/>", NULL};
 
-	/* Create a about dialog for displaying about the iPDC. */
+	/* Create a about dialog for displaying about the DPDC. */
 	about_dialog = gtk_about_dialog_new ();
 
 	/* Define the diffrent properties of about_dialog. */
 	gtk_about_dialog_set_program_name ((GtkAboutDialog *)about_dialog, " ");
 	gtk_about_dialog_set_comments ((GtkAboutDialog *)about_dialog, "Authors :\nAshutosh Sharma\nAyush Agrawal\n\nWide Area Measurement System\nDepartment of Electrical & Electronics Engineering\nNational Institute of Technology, Tiruchirappalli\nTiruchirappalli, INDIA");
 
-	gtk_about_dialog_set_license ((GtkAboutDialog *)about_dialog, "iPDC - A Phasor Data Concentrator & PMU Simulator\n\nGeneral Public License (GPL)\n\nAuthors:\n\t\tAyush Agrawal <ayushagrawal049@gmail.com>\n\t\tAshutosh Sharma <ashutosh89393@gmail>\n\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n");
+	gtk_about_dialog_set_license ((GtkAboutDialog *)about_dialog, "DPDC - A Phasor Data Concentrator & PMU Simulator\n\nGeneral Public License (GPL)\n\nAuthors:\n\t\tAyush Agrawal <ayushagrawal049@gmail.com>\n\t\tAshutosh Sharma <ashutosh89393@gmail>\n\n\nThis program is free software; you can redistribute it and/or\nmodify it under the terms of the GNU General Public License\nas published by the Free Software Foundation; either version 2\nof the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful,\nbut WITHOUT ANY WARRANTY; without even the implied warranty of\nMERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\nGNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License\nalong with this program; if not, write to the Free Software\nFoundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.\n");
 
     gtk_about_dialog_set_logo ((GtkAboutDialog *)about_dialog, pixbuf);
-	gtk_about_dialog_set_website ((GtkAboutDialog *)about_dialog, "https://github.com/ashu704/iPDC");
+	gtk_about_dialog_set_website ((GtkAboutDialog *)about_dialog, "https://github.com/ashu704/DPDC");
 	gtk_about_dialog_set_copyright ((GtkAboutDialog *)about_dialog, "Copyright (C) 2020-2021 GPL3");
 	gtk_about_dialog_set_authors ((GtkAboutDialog *)about_dialog, auth);
 
@@ -460,7 +460,7 @@ void Set_data_source(GtkRadioButton *radiobutton, gpointer udata)
     char *file_path;
     file_path = malloc(200*sizeof(char));
     strcpy(file_path, getenv("HOME"));
-    strcat(file_path,"/iPDC/DataDir/");
+    strcat(file_path,"/DPDC/DataDir/");
     gint event;
    
     if(strcmp("Auto Genetared", gtk_button_get_label(GTK_BUTTON(radiobutton))))
@@ -582,7 +582,7 @@ void pmu_setup_file_selection(GtkWidget *widget, gpointer udata)
     file_path = malloc( 200*sizeof(char));
     memset(file_path,'\0',200);
     strcpy(file_path,getenv("HOME"));
-    strcat(file_path,"/iPDC/PMU/");
+    strcat(file_path,"/DPDC/PMU/");
 
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 
@@ -641,7 +641,7 @@ void view_setup_file (GtkWidget *w, GtkFileChooser *fs)
 	}
 	else 
 	{
-		/* If its available, then create a new dialog window for displaying the iPDC details. */
+		/* If its available, then create a new dialog window for displaying the DPDC details. */
 		setup_display_window = gtk_dialog_new ();
 		gtk_window_set_title (GTK_WINDOW (setup_display_window), "PMU Simulator Setup");
 		gtk_container_set_border_width (GTK_CONTAINER (setup_display_window), 10);

@@ -51,7 +51,7 @@ void setup(){
 	server = "localhost";
 	user = "root";
 	password = "root";	/* Change this password value, if not the same in your case? */
-	database = "iPDC";
+	database = "DPDC";
 
 	/* MySQL data base connection */
 	conn_data = mysql_init(NULL);
