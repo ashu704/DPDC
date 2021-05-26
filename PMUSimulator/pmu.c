@@ -139,7 +139,7 @@ int main(int argc, char **argv)
 			printf("user not found\n");
 			exit(1);
 		}
-		strcat(ptr1, "/iPDC");
+		strcat(ptr1, "/DPDC");
         
 
 		if(stat(ptr1,&st) == 0)
@@ -187,7 +187,7 @@ int main(int argc, char **argv)
 				if (mkdir (ptr1, 0700))
 				{
 					printf ("cannot create directory `%s': %s\n", pmuFolderPath, strerror (errno));
-					validation_result ("cannot create iPDC directory on proposed path.\t\n");
+					validation_result ("cannot create DPDC directory on proposed path.\t\n");
 				}
 				else
 				{
@@ -198,7 +198,7 @@ int main(int argc, char **argv)
 				}
 			}
             strcpy(ptr1,getenv("HOME"));
-            strcat(ptr1,"/iPDC/DataDir");
+            strcat(ptr1,"/DPDC/DataDir");
 			if(stat(ptr1,&st) != 0)
 			{
                 if (mkdir (ptr1, 0700))

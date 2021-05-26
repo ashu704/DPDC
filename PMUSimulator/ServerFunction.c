@@ -953,7 +953,7 @@ void* pmu_udp()
 				df_temp[1] = udp_command[5];
 				id_pdc  = c2i (df_temp);
 
-				if(id_pdc == df_pmu_id)		/* Check if it is coming from authentic PDC/iPDC */ 
+				if(id_pdc == df_pmu_id)		/* Check if it is coming from authentic PDC/DPDC */ 
 				{	
 					c = udp_command[15];
 
@@ -1257,7 +1257,7 @@ void* new_pmu_tcp(void * nfd)
 				df_temp[1] = tcp_command[5];
 				id_pdc = c2i (df_temp);
 
-				if(id_pdc == df_pmu_id)		/* Check if it is coming from authentic PDC/iPDC */ 
+				if(id_pdc == df_pmu_id)		/* Check if it is coming from authentic PDC/DPDC */ 
 				{	
 					c = tcp_command[15];
 					if((c & 0x05) == 0x05)		/* Command frame for Configuration Frame-2 request from PDC */
@@ -1569,7 +1569,7 @@ void start_server()
 		exit(1);
 	}
 	strcat(pmuFolderPath, ptr1);
-	strcat(pmuFolderPath, "/iPDC/PMU");
+	strcat(pmuFolderPath, "/DPDC/PMU");
 
 	if(protocol_choice == 1)
 	{     

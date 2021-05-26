@@ -150,10 +150,6 @@ void about_pmu (GtkButton *widget, gpointer udata)
 void Pmu_Help (GtkButton *but, gpointer udata)
 {
 
-	printf("\n\t\t|-------------------------------------------------------|\n");      
-	printf("\t\t|\t\tPMU HELP\t\t|\n");      
-	printf("\t\t|-------------------------------------------------------|\n");      
-
 	/* Create the widgets */
 	help_dialog = gtk_about_dialog_new ();
 
